@@ -35,5 +35,5 @@ your repo access and to practice PR'ing with your team *before* you start
 coding!
 
 - Teammate name #1: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
-- Lisa Rexroad (Primary Scrum Master): [GitHub] https://github.com/lrexroad / [LinkedIn] https://www.linkedin.com/in/lisa-rexroad-csm-sa-ccmp-b556511b/
+- Lisa Rexroad (Primary Scrum Master): [GitHub](https://github.com/lrexroad) / [LinkedIn](https://www.linkedin.com/in/lisa-rexroad-csm-sa-ccmp-b556511b/)
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
