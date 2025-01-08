@@ -39,3 +39,4 @@ coding!
 - Jon Deichmann (Developer): [GitHub](https://github.com/jcad57?tab=repositories) / [LinkedIn](https://www.linkedin.com/in/jon-deichmann/)
 - Jun Kyung Lee (Developer): [GitHub](https://github.com/junlee0325) / [LinkedIn](https://www.linkedin.com/in/iam-junkyunglee/)
 - Ivan Rebolledo (Developer): [GitHub](https://github.com/ivannissimrch) / [LinkedIn](https://www.linkedin.com/in/ivan-rebolledo-012b17244/)
+- JC Smiley (Developer)): [GitHub](https://github.com/jcsmileyjr) / [LinkedIn](www.linkedin.com/in/jcsmileyjr)
