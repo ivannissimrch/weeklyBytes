@@ -41,4 +41,4 @@ coding!
 - Ivan Rebolledo (Developer): [GitHub](https://github.com/ivannissimrch) / [LinkedIn](https://www.linkedin.com/in/ivan-rebolledo-012b17244/)
 - JC Smiley (Developer)): [GitHub](https://github.com/jcsmileyjr) / [LinkedIn](https://www.linkedin.com/in/jcsmileyjr/)
 - Vartika Patel (UX Designer): [GitHub](https://github.com/vartika99) / [LinkedIn](https://www.linkedin.com/in/vartikapatel/)
-- Jessica Beazer: [GitHub](https://github.com/jessanagilepmp) / [LinkedIn](https://linkedin.com/in/jessicabeazer)
+- Jessica Beazer(Product Owner): [GitHub](https://github.com/jessanagilepmp) / [LinkedIn](https://linkedin.com/in/jessicabeazer)
