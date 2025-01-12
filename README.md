@@ -37,7 +37,7 @@ coding!
 - Teammate name #1: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Lisa Rexroad (Primary Scrum Master): [GitHub](https://github.com/lrexroad) / [LinkedIn](https://www.linkedin.com/in/lisa-rexroad-csm-sa-ccmp-b556511b/)
 - Jon Deichmann (Developer): [GitHub](https://github.com/jcad57?tab=repositories) / [LinkedIn](https://www.linkedin.com/in/jon-deichmann/)
-- Jun Kyung Lee (Developer): [GitHub](https://github.com/junlee0325) / [LinkedIn](https://www.linkedin.com/in/iam-junkyunglee/)
+- Jun Kyung Lee (Developer): [GitHub](https://github.com/junlee0325) / [LinkedIn](https://www.linkedin.com/in/iam-junkyunglee/) 
 - Ivan Rebolledo Chavez (Developer): [GitHub](https://github.com/ivannissimrch) / [LinkedIn](https://www.linkedin.com/in/ivan-rebolledo-012b17244/)
 - JC Smiley (Developer)): [GitHub](https://github.com/jcsmileyjr) / [LinkedIn](https://www.linkedin.com/in/jcsmileyjr/)
 - Vartika Patel (UX Designer): [GitHub](https://github.com/vartika99) / [LinkedIn](https://www.linkedin.com/in/vartikapatel/)
