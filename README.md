@@ -42,5 +42,5 @@ coding!
 - JC Smiley Jr. (Developer)): [GitHub](https://github.com/jcsmileyjr) / [LinkedIn](https://www.linkedin.com/in/jcsmileyjr/)
 - Vartika Patel (UX Designer): [GitHub](https://github.com/vartika99) / [LinkedIn](https://www.linkedin.com/in/vartikapatel/)
 - Jessica Beazer(Product Owner): [GitHub](https://github.com/jessanagilepmp) / [LinkedIn](https://linkedin.com/in/jessicabeazer)
-- Jennifer Alexander (Voyage Guide): [GitHub](https://github.com/jenny-alexander) / [LinkedIn](https://linkedin.com/in/jenny-alexander)
+- Jennifer Alexander1 (Voyage Guide): [GitHub](https://github.com/jenny-alexander) / [LinkedIn](https://linkedin.com/in/jenny-alexander)
 - Radhika Lele (Junior Developer) : [GitHub](https://github.com/Radhika-Lele) / [LinkedIn](https://www.linkedin.com/in/radhika-lele)
