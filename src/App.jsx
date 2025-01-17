@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import { createContext } from "react";
+import { createContext } from "react";
 import RootLayout from "./pages/Root.jsx";
 import Home from "./pages/Home.jsx";
 import Allergies from "./pages/Allergies.jsx";
 
-// export const AppContext = createContext([]);
+export const AppContext = createContext([]);
 
 function App() {
   const router = createBrowserRouter([
