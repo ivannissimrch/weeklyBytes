@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    display: grid;
+    place-items: center;
+    margin-inline: auto;
+    width: min(82.75rem, 100%);
+    padding: 4.375rem;
+}
