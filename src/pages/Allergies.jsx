@@ -49,20 +49,29 @@ export default function Allergies() {
     const uniqueAllergens = [...new Set(employeesAllergens.flat())];
     //dishes safe for employees
     const safeDishes = getSafeDishes(fetchedDishes, uniqueAllergens);
-    console.log(safeDishes);
     //save safe dishes to local storage
     storeSafeDishes(safeDishes);
   }
 
   return (
     <>
-      <section>
-        <h2>Allergies</h2>{" "}
-        <ul>
+      <h2 className="text-center m-4">Allergies</h2>{" "}
+      <section className="flex flex-col w-full">
+        <ul className="flex flex-col items-center gap-2">
+          <li className="flex w-full items-center  gap-2">
+            <span className="w-56 bg-slate-100 flex justify-center items-center h-10">
+              Employee Name
+            </span>
+            <span className="w-96 bg-slate-100 flex justify-center items-center h-10">
+              Allergy
+            </span>
+          </li>
           {employeesData.map((employee) => (
-            <li key={employee.name}>
-              <span>{employee.name}</span>
-              <span>
+            <li className="flex w-full items-center  gap-2" key={employee.name}>
+              <span className="w-56 bg-slate-100 flex justify-center items-center h-10">
+                {employee.name}
+              </span>
+              <span className="w-96 bg-slate-100">
                 <Select
                   onChange={(selectedOptions) =>
                     updateEmployeeAllergies(employee, selectedOptions)
@@ -81,7 +90,7 @@ export default function Allergies() {
   );
 }
 
-//Dishes API loader I could use the dishes function instead of this one but the way it was writing does not work as a loader.
+//Dishes API loader I could use the dishes function on data folder instead of this one but the way it was writing does not work as a loader.
 export async function dishesDataLoader() {
   try {
     const ApiResponse = await fetch("https://menus-api.vercel.app/dishes");
