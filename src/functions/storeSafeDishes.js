@@ -1,3 +1,3 @@
-export default function (dishesSafeForEmployees) {
-  localStorage.setItem("safeDishes", JSON.stringify(dishesSafeForEmployees));
+export default function storeSafeDishes(dishesSafeForEmployees) {
+    localStorage.setItem("safeDishes", JSON.stringify(dishesSafeForEmployees));
 }

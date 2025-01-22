@@ -1,3 +1,3 @@
-export default function getEmployeesInfoLocal() {
-  return JSON.parse(localStorage.getItem("safeDishes"));
+export default function getSafeDishesFromLocal() {
+    return JSON.parse(localStorage.getItem("safeDishes"));
 }
