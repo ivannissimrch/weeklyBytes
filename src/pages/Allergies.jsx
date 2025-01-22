@@ -1,3 +1,3 @@
 export default function Allergies() {
-  return <h1>Allergies</h1>;
+    return <h1>Allergies</h1>;
 }
