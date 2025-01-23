@@ -7,6 +7,7 @@ import storeEmployeesInfo from "../functions/storeEmployeesInfo";
 import getEmployeesInfoLocal from "../functions/getEmployeesInfoLocal";
 import storeSafeDishes from "../functions/storeSafeDishes";
 import getSafeDishes from "../functions/getSafeDishes";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Allergies() {
     const fetchDishes = useLoaderData();
@@ -50,6 +51,17 @@ export default function Allergies() {
         storeSafeDishes(safeDishes);
     }
 
+    function deleteAllergies(selectedEmployee) {
+        const updatedEmployeesData = employeesData.map((employee) => {
+            if (employee.name === selectedEmployee.name) {
+                employee.allergies = []; // Reset allergies
+            }
+            return employee;
+        });
+        setEmployeesData(updatedEmployeesData);
+        storeEmployeesInfo(updatedEmployeesData);
+    }
+
     return (
         <>
             <h2 className="text-center m-4">Allergies</h2>{" "}
@@ -73,6 +85,13 @@ export default function Allergies() {
                                     value={employee.allergies}
                                 />
                             </span>
+                            <button
+                                className="w-10 bg-red-500 text-white flex justify-center items-center h-8 rounded"
+                                onClick={() => deleteAllergies(employee)}
+                                title="Delete all allergies"
+                            >
+                                <DeleteIcon />
+                            </button>
                         </li>
                     ))}
                 </ul>
