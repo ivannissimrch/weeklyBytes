@@ -1,19 +1,17 @@
-import { useState } from "react";
 import Select from "react-select";
 import { useLoaderData } from "react-router-dom";
 import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
-import storeEmployeesInfo from "../functions/storeEmployeesInfo";
-import getEmployeesInfoLocal from "../functions/getEmployeesInfoLocal";
-import storeSafeDishes from "../functions/storeSafeDishes";
-import getSafeDishes from "../functions/getSafeDishes";
+import identifySafeDishes from "../functions/identifySafeDishes";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
-  const storedEmployeesData = getEmployeesInfoLocal();
-  const [employeesData, setEmployeesData] = useState(
-    storedEmployeesData !== null ? storedEmployeesData : INITIAL_EMPLOYEE_DATA
+  const [employeesData, setEmployeesData] = useLocalStorage(
+    "employeesData",
+    INITIAL_EMPLOYEE_DATA
   );
+  const [safeDishes, setSafeDishes] = useLocalStorage("safeDishes", []);
 
   function updateEmployeeAllergies(selectedEmployee, selectedOptions) {
     const updatedEmployeesData = employeesData.map((employee) => {
@@ -24,10 +22,9 @@ export default function Allergies() {
       }
       return employee;
     });
-    setEmployeesData(updatedEmployeesData);
     //save update employees allergies to local storage
-    storeEmployeesInfo(updatedEmployeesData);
-
+    setEmployeesData(updatedEmployeesData);
+    //filter employees with allergies
     const employeesWithAllergies = updatedEmployeesData.filter(
       (employee) => employee.allergies.length > 0
     );
@@ -47,9 +44,9 @@ export default function Allergies() {
     //list of allergens selected unique values
     const uniqueAllergens = [...new Set(employeesAllergens.flat())];
     //dishes safe for employees
-    const safeDishes = getSafeDishes(fetchDishes, uniqueAllergens);
+    const updatedSafeDishes = identifySafeDishes(fetchDishes, uniqueAllergens);
     //save safe dishes to local storage
-    storeSafeDishes(safeDishes);
+    setSafeDishes(updatedSafeDishes);
   }
 
   return (
