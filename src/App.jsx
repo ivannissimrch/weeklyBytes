@@ -5,6 +5,7 @@ import RootLayout from "./pages/Root.jsx";
 import Home from "./pages/Home.jsx";
 import Allergies from "./pages/Allergies.jsx";
 import dataDishesLoader from "./data/dishes.js";
+import GenerateMenu from "./pages/GenerateMenu.jsx";
 
 export const AppContext = createContext([]);
 
@@ -23,6 +24,10 @@ function App() {
                     path: "Allergies",
                     loader: dataDishesLoader,
                     element: <Allergies />,
+                },
+                {
+                    path: "GenerateMenu",
+                    element: <GenerateMenu />,
                 },
             ],
         },

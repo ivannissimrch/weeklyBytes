@@ -1,4 +1,4 @@
-export default function getSafeDishes(fetchedDishes, uniqueAllergens) {
+export default function identifySafeDishes(fetchedDishes, uniqueAllergens) {
   return fetchedDishes.filter((dish) => {
     //exclude dishes with allergen on name
     const hasAllergenInName = dish.name

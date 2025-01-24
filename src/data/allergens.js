@@ -1,6 +1,6 @@
 export const ALLERGENS = [
   {
-    value: "Wheat Pasta Flour Bread Cake",
+    value: "Wheat Pasta Flour Bread Cake Pancakes",
     label: "Gluten",
   },
   { value: "Milk Cream Cheese Butter Yogurt", label: "Dairy" },

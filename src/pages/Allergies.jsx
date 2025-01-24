@@ -1,20 +1,16 @@
-import { useState } from "react";
-import Select from "react-select";
 import { useLoaderData } from "react-router-dom";
 import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
-import storeEmployeesInfo from "../functions/storeEmployeesInfo";
-import getEmployeesInfoLocal from "../functions/getEmployeesInfoLocal";
-import storeSafeDishes from "../functions/storeSafeDishes";
-import getSafeDishes from "../functions/getSafeDishes";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useLocalStorage } from "../hooks/useLocalStorage";
+
+import DeleteIcon from "@mui/icons-material/Delete";
+import Select from "react-select";
+import identifySafeDishes from "../functions/identifySafeDishes";
 
 export default function Allergies() {
     const fetchDishes = useLoaderData();
-    const storedEmployeesData = getEmployeesInfoLocal();
-    const [employeesData, setEmployeesData] = useState(
-        storedEmployeesData !== null ? storedEmployeesData : INITIAL_EMPLOYEE_DATA
-    );
+    const [employeesData, setEmployeesData] = useLocalStorage("employeesData", INITIAL_EMPLOYEE_DATA);
+    const [safeDishes, setSafeDishes] = useLocalStorage("safeDishes", []);
 
     function updateEmployeeAllergies(selectedEmployee, selectedOptions) {
         const updatedEmployeesData = employeesData.map((employee) => {
@@ -25,10 +21,9 @@ export default function Allergies() {
             }
             return employee;
         });
-        setEmployeesData(updatedEmployeesData);
         //save update employees allergies to local storage
-        storeEmployeesInfo(updatedEmployeesData);
-
+        setEmployeesData(updatedEmployeesData);
+        //filter employees with allergies
         const employeesWithAllergies = updatedEmployeesData.filter((employee) => employee.allergies.length > 0);
         const employeesAllergens = employeesWithAllergies.map((employee) =>
             employee.allergies.flatMap((allergy) => {
@@ -46,9 +41,9 @@ export default function Allergies() {
         //list of allergens selected unique values
         const uniqueAllergens = [...new Set(employeesAllergens.flat())];
         //dishes safe for employees
-        const safeDishes = getSafeDishes(fetchDishes, uniqueAllergens);
+        const updatedSafeDishes = identifySafeDishes(fetchDishes, uniqueAllergens);
         //save safe dishes to local storage
-        storeSafeDishes(safeDishes);
+        setSafeDishes(updatedSafeDishes);
     }
 
     function deleteAllergies(selectedEmployee) {
@@ -59,9 +54,7 @@ export default function Allergies() {
             return employee;
         });
         setEmployeesData(updatedEmployeesData);
-        storeEmployeesInfo(updatedEmployeesData);
     }
-
     return (
         <>
             <h2 className="text-center m-4">Allergies</h2>{" "}
@@ -88,8 +81,7 @@ export default function Allergies() {
                             <button
                                 className="w-10 bg-red-500 text-white flex justify-center items-center h-8 rounded"
                                 onClick={() => deleteAllergies(employee)}
-                                title="Delete all allergies"
-                            >
+                                title="Delete all allergies">
                                 <DeleteIcon />
                             </button>
                         </li>
@@ -99,20 +91,3 @@ export default function Allergies() {
         </>
     );
 }
-
-// TODO: I turned my dishes.js file into a dataLoader function. I updated the App.jsx file to include this new import and send that data to the dishesDataLoader
-
-//Dishes API loader I could use the dishes function on data folder instead of this one but the way it was writing does not work as a loader.
-// export async function dishesDataLoader() {
-//     try {
-//         const ApiResponse = await fetch("https://menus-api.vercel.app/dishes");
-//         if (!ApiResponse.ok) {
-//             throw new Error(`Response status: ${ApiResponse.status}`);
-//         }
-//         const dishesData = await ApiResponse.json();
-//         return dishesData;
-//     } catch (error) {
-//         console.error(error.message);
-//         return [];
-//     }
-// }
