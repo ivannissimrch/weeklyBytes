@@ -2,7 +2,6 @@ import { useLoaderData } from "react-router-dom";
 import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
 import DeleteIcon from "@mui/icons-material/Delete";
 import Select from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
@@ -90,7 +89,7 @@ export default function Allergies() {
                 />
               </span>
               <button
-                className="w-10  bg-white text-black flex justify-center items-center h-8 rounded"
+                className="w-10  bg-white text- flex justify-center items-center h-8 rounded"
                 onClick={() => deleteAllergies(employee)}
                 title="Delete all allergies"
               >
