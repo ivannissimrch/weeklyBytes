@@ -1,17 +1,41 @@
 /* eslint-disable react/prop-types -- bypass proptypes error */
 import { DayCard } from "./DayCard";
 import useGenerateWeeklyDishes from "../../hooks/useGenerateWeeklyDishes";
+import moment from "moment";
+import { useState, useEffect } from "react";
+import getWeekDays from "../../functions/getWeekDays.js";
+
+//looks at today's date and produce an array of days of the current week
+function getWeekLabels(weekStart) {
+      const days = [];
+    
+      for (let i = 0; i < 7; i += 1) {
+        //changes DATE data into a STRING and removes time data (ex: "Mon Jan 20 2025")
+        days.push(moment(weekStart).add(i, "days").toString().slice(0, 15));
+      }
+
+      return days;
+}
+
 export function WeeklyMenu({ week }) {
     const currentWeekDishes = useGenerateWeeklyDishes();
-    const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]; // temp data for days of week
+    const [currentWeekDaysLabels, setCurrentWeekDaysLabels] = useState([])
+    const [currentWeekDays, setCurrentWeekDays] = useState([])
+
+    //populates currentWeekDaysLabels and currentWeekDays at component render
+    useEffect(() => {
+        setCurrentWeekDaysLabels(getWeekLabels(moment().startOf('isoWeek')))
+        setCurrentWeekDays(getWeekDays(moment().startOf('isoWeek')))
+    },[])
 
     return (
         <>
             <div className="gap-14 bg-slate-100 p-6">
                 <h2 className="text-center my-8">{week === "current" ? "This" : "Upcoming"} Week&apos;s Menu</h2>
+                <button onClick={() => console.log(currentWeekDays)}>test</button>
                 <div className="grid grid-cols-4 gap-6">
                     {Array.from(currentWeekDishes).map((dish, i) => (
-                        <DayCard key={i} dish={dish} day={days[i]} />
+                        <DayCard key={i} dish={dish} day={currentWeekDaysLabels[i]} />
                     ))}
                 </div>
             </div>
