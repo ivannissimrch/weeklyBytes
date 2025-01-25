@@ -1,5 +1,6 @@
 import { WeeklyMenu } from "../components/weekly-menu/WeeklyMenu";
 import { NavLink } from "react-router-dom";
+import moment from "moment";
 
 
 export default function Home() {
@@ -11,10 +12,10 @@ export default function Home() {
             {localStorage.getItem("safeDishes") ? (
                 <div className="flex flex-col gap-10">
                     {/* Current Week menu */}
-                    <WeeklyMenu week={"current"} />
+                    <WeeklyMenu weekStartDay={moment().startOf('isoWeek')} />
 
                     {/* Upcoming Week menu */}
-                    <WeeklyMenu week={"upcoming"} />
+                    <WeeklyMenu weekStartDay={moment().add(7,"days").startOf('isoWeek')} />
                 </div>
             ) : (
                 <p className="text-center">Set employee allergies before continuing</p>
