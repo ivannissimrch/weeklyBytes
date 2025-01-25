@@ -17,21 +17,21 @@ function getWeekLabels(weekStart) {
       return days;
 }
 
-export function WeeklyMenu({ week }) {
+export function WeeklyMenu({ weekStartDay }) {
     const currentWeekDishes = useGenerateWeeklyDishes();
     const [currentWeekDaysLabels, setCurrentWeekDaysLabels] = useState([])
     const [currentWeekDays, setCurrentWeekDays] = useState([])
 
     //populates currentWeekDaysLabels and currentWeekDays at component render
     useEffect(() => {
-        setCurrentWeekDaysLabels(getWeekLabels(moment().startOf('isoWeek')))
-        setCurrentWeekDays(getWeekDays(moment().startOf('isoWeek')))
+        setCurrentWeekDaysLabels(getWeekLabels(weekStartDay))
+        setCurrentWeekDays(getWeekDays(weekStartDay))
     },[])
 
     return (
         <>
             <div className="gap-14 bg-slate-100 p-6">
-                <h2 className="text-center my-8">{week === "current" ? "This" : "Upcoming"} Week&apos;s Menu</h2>
+                <h2 className="text-center my-8">{getWeekDays(weekStartDay).includes(moment().toISOString().slice(0, 10)) ? "This" : "Upcoming"} Week&apos;s Menu</h2>
                 <button onClick={() => console.log(currentWeekDays)}>test</button>
                 <div className="grid grid-cols-4 gap-6">
                     {Array.from(currentWeekDishes).map((dish, i) => (
