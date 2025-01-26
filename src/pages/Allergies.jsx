@@ -3,8 +3,46 @@ import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Select from "react-select";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
+import { useState } from "react";
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: "rgba(224, 231, 255,1)",
+    text: "center",
+    overflow: "hidden",
+  }),
+
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused
+      ? "rgba(197, 233, 255, 1)"
+      : "rgb(241, 245, 249)",
+  }),
+  multiValue: (provided) => ({
+    ...provided,
+    backgroundColor: "rgba(224, 231, 255,1)",
+  }),
+  placeholder: (provided) => {
+    return {
+      ...provided,
+      textAlign: "center",
+    };
+  },
+  indicatorSeparator: (provided, state) => ({}),
+  clearIndicator: (provided, state) => ({}),
+  dropdownIndicator: (provided, state) => {
+    return {
+      ...provided,
+      color: "black",
+      transform: state.isFocused ? "rotate(180deg)" : "rotate(0deg)",
+    };
+  },
+};
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -13,6 +51,9 @@ export default function Allergies() {
     INITIAL_EMPLOYEE_DATA
   );
   const [safeDishes, setSafeDishes] = useLocalStorage("safeDishes", []);
+  const [editingEmployee, setEditingEmployee] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   function updateEmployeeAllergies(selectedEmployee, selectedOptions) {
     const updatedEmployeesData = employeesData.map((employee) => {
@@ -58,7 +99,13 @@ export default function Allergies() {
       return employee;
     });
     setEmployeesData(updatedEmployeesData);
+    setEditingEmployee(null);
   }
+
+  function toogleEditing(employeeName) {
+    setEditingEmployee((prev) => (prev === employeeName ? null : employeeName));
+  }
+
   return (
     <>
       <h2 className="text-center m-4">Allergies</h2>{" "}
@@ -77,8 +124,9 @@ export default function Allergies() {
               <span className="w-56 bg-indigo-100 flex justify-center items-center h-10">
                 {employee.name}
               </span>
-              <span className="w-96 bg-indigo-100">
+              <span className="w-96 bg-indigo-100 relative">
                 <Select
+                  styles={customStyles}
                   onChange={(selectedOptions) =>
                     updateEmployeeAllergies(employee, selectedOptions)
                   }
@@ -86,11 +134,67 @@ export default function Allergies() {
                   isMulti
                   options={ALLERGENS}
                   value={employee.allergies}
+                  placeholder={"[Allergy]"}
+                  isClearable={false}
+                  isDisabled={employee.allergies.length > 0 && !isMenuOpen}
+                  onMenuOpen={() => {
+                    setIsMenuOpen(true);
+                    setEditingEmployee(employee.name);
+                  }}
+                  onMenuClose={() => {
+                    setIsMenuOpen(false);
+                  }}
+                  // menuIsOpen={
+                  //   openMenu && employee.name === editingEmployee ? true : false
+                  // }
+                  components={{
+                    MultiValueRemove: (props) =>
+                      editingEmployee === employee.name &&
+                      isMenuOpen === true ? (
+                        <components.MultiValueRemove {...props}>
+                          <span>
+                            {" "}
+                            <DeleteIcon />
+                          </span>
+                        </components.MultiValueRemove>
+                      ) : null,
+                  }}
                 />
+                {isMenuOpen === false && employee.allergies.length > 0 ? (
+                  <button
+                    className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
+                    onClick={(event) => {
+                      setEditingEmployee(employee.name);
+                      setIsMenuOpen(true);
+                      setOpenMenu(true);
+                    }}
+                  >
+                    <ModeEditOutlineOutlinedIcon />
+                  </button>
+                ) : (
+                  ""
+                )}
+                {employee.allergies.length > 0 &&
+                isMenuOpen &&
+                employee.name === editingEmployee ? (
+                  <button
+                    className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
+                    onClick={(event) => {
+                      setEditingEmployee(null);
+                      setIsMenuOpen(false);
+                      setOpenMenu(false);
+                    }}
+                  >
+                    <SaveOutlinedIcon />
+                  </button>
+                ) : (
+                  ""
+                )}
               </span>
+
               <button
                 className="w-10  bg-white text- flex justify-center items-center h-8 rounded"
-                onClick={() => deleteAllergies(employee)}
+                onClick={(event) => deleteAllergies(employee)}
                 title="Delete all allergies"
               >
                 <DeleteIcon />
