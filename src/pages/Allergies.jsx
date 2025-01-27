@@ -5,6 +5,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import ClearIcon from "@mui/icons-material/Clear";
 import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
 import { useState } from "react";
@@ -13,8 +14,14 @@ const customStyles = {
   control: (provided) => ({
     ...provided,
     backgroundColor: "rgba(224, 231, 255,1)",
-    text: "center",
+    textAlign: "center",
     overflow: "hidden",
+  }),
+  ValueContainer: (provided) => ({
+    ...provided,
+    textAlign: "center",
+    justifyContent: "center",
+    height: "64px",
   }),
 
   option: (provided, state) => ({
@@ -22,6 +29,7 @@ const customStyles = {
     backgroundColor: state.isFocused
       ? "rgba(197, 233, 255, 1)"
       : "rgb(241, 245, 249)",
+    textAlign: "center",
   }),
   multiValue: (provided) => ({
     ...provided,
@@ -31,6 +39,9 @@ const customStyles = {
     return {
       ...provided,
       textAlign: "center",
+      justifyContent: "center",
+      height: "64px",
+      padding: "10px",
     };
   },
   indicatorSeparator: (provided, state) => ({}),
@@ -108,23 +119,23 @@ export default function Allergies() {
 
   return (
     <>
-      <h2 className="text-center m-4">Allergies</h2>{" "}
+      <h2 className="text-center m-4 text-[32px] font-normal">Allergies</h2>{" "}
       <section className="flex flex-col w-full">
-        <ul className="flex flex-col items-center gap-2">
-          <li className="flex w-full items-center  gap-2">
-            <span className="w-56 bg-indigo-100 flex justify-center items-center h-10">
+        <ul className="flex flex-col items-center gap-4 text-[22px]">
+          <li className="flex w-full items-center  gap-4">
+            <span className="w-[427px] h-[70px] bg-indigo-100 flex justify-center items-center ">
               Employee Name
             </span>
-            <span className="w-96 bg-indigo-100 flex justify-center items-center h-10">
+            <span className="w-[427px]  h-[70px] bg-indigo-100 flex justify-center items-center">
               Allergy
             </span>
           </li>
           {employeesData.map((employee) => (
-            <li className="flex w-full items-center  gap-2" key={employee.name}>
-              <span className="w-56 bg-indigo-100 flex justify-center items-center h-10">
+            <li className="flex w-full items-center  gap-4" key={employee.name}>
+              <span className="w-[427px]  h-[70px] bg-indigo-100 flex justify-center items-center ">
                 {employee.name}
               </span>
-              <span className="w-96 bg-indigo-100 relative">
+              <span className="w-[427px]  h-[70px] bg-indigo-100 relative">
                 <Select
                   styles={customStyles}
                   onChange={(selectedOptions) =>
@@ -152,10 +163,7 @@ export default function Allergies() {
                       editingEmployee === employee.name &&
                       isMenuOpen === true ? (
                         <components.MultiValueRemove {...props}>
-                          <span>
-                            {" "}
-                            <DeleteIcon />
-                          </span>
+                          <DeleteIcon />
                         </components.MultiValueRemove>
                       ) : null,
                   }}
@@ -169,7 +177,7 @@ export default function Allergies() {
                       setOpenMenu(true);
                     }}
                   >
-                    <ModeEditOutlineOutlinedIcon />
+                    <ModeEditOutlineOutlinedIcon fontSize="large" />
                   </button>
                 ) : (
                   ""
@@ -185,7 +193,7 @@ export default function Allergies() {
                       setOpenMenu(false);
                     }}
                   >
-                    <SaveOutlinedIcon />
+                    <SaveOutlinedIcon fontSize="large" />
                   </button>
                 ) : (
                   ""
@@ -197,7 +205,7 @@ export default function Allergies() {
                 onClick={(event) => deleteAllergies(employee)}
                 title="Delete all allergies"
               >
-                <DeleteIcon />
+                <DeleteIcon fontSize="large" />
               </button>
             </li>
           ))}
