@@ -18,8 +18,8 @@ export default function Allergies() {
   );
   const [safeDishes, setSafeDishes] = useLocalStorage("safeDishes", []);
   const [editingEmployee, setEditingEmployee] = useState(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
+  const [isEmployeeMenuOpen, setIsEmployeeMenuOpen] = useState(null);
+  // const [openMenu, setOpenMenu] = useState(false);
 
   function updateEmployeeAllergies(selectedEmployee, selectedOptions) {
     const updatedEmployeesData = employeesData.map((employee) => {
@@ -68,10 +68,6 @@ export default function Allergies() {
     setEditingEmployee(null);
   }
 
-  function toogleEditing(employeeName) {
-    setEditingEmployee((prev) => (prev === employeeName ? null : employeeName));
-  }
-
   return (
     <>
       <h2 className="text-center m-4 text-[32px] font-normal">Allergies</h2>{" "}
@@ -102,50 +98,44 @@ export default function Allergies() {
                   value={employee.allergies}
                   placeholder={"[Allergy]"}
                   isClearable={false}
-                  isDisabled={employee.allergies.length > 0 && !isMenuOpen}
+                  isDisabled={
+                    employee.allergies.length > 0 && !isEmployeeMenuOpen
+                  }
                   onMenuOpen={() => {
-                    setIsMenuOpen(true);
+                    setIsEmployeeMenuOpen(employee.name);
                     setEditingEmployee(employee.name);
                   }}
                   onMenuClose={() => {
-                    setIsMenuOpen(false);
+                    setIsEmployeeMenuOpen(null);
                   }}
-                  // menuIsOpen={
-                  //   openMenu && employee.name === editingEmployee ? true : false
-                  // }
                   components={{
                     MultiValueRemove: (props) =>
                       editingEmployee === employee.name &&
-                      isMenuOpen === true ? (
+                      isEmployeeMenuOpen === employee.name ? (
                         <components.MultiValueRemove {...props}>
                           <DeleteIcon />
                         </components.MultiValueRemove>
                       ) : null,
                   }}
                 />
-                {isMenuOpen === false && employee.allergies.length > 0 ? (
-                  <button
-                    className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
-                    onClick={(event) => {
-                      setEditingEmployee(employee.name);
-                      setIsMenuOpen(true);
-                      setOpenMenu(true);
-                    }}
-                  >
-                    <ModeEditOutlineOutlinedIcon fontSize="large" />
-                  </button>
-                ) : (
-                  ""
-                )}
+                {isEmployeeMenuOpen !== employee.name &&
+                  employee.allergies.length > 0 && (
+                    <button
+                      className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
+                      onClick={(event) => {
+                        setEditingEmployee(employee.name);
+                        setIsEmployeeMenuOpen(employee.name);
+                      }}
+                    >
+                      <ModeEditOutlineOutlinedIcon fontSize="large" />
+                    </button>
+                  )}
                 {employee.allergies.length > 0 &&
-                isMenuOpen &&
                 employee.name === editingEmployee ? (
                   <button
                     className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
                     onClick={(event) => {
                       setEditingEmployee(null);
-                      setIsMenuOpen(false);
-                      setOpenMenu(false);
                     }}
                   >
                     <SaveOutlinedIcon fontSize="large" />
