@@ -5,55 +5,10 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
-import ClearIcon from "@mui/icons-material/Clear";
 import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
 import { useState } from "react";
-
-const customStyles = {
-  control: (provided) => ({
-    ...provided,
-    backgroundColor: "rgba(224, 231, 255,1)",
-    textAlign: "center",
-    overflow: "hidden",
-  }),
-  ValueContainer: (provided) => ({
-    ...provided,
-    textAlign: "center",
-    justifyContent: "center",
-    height: "64px",
-  }),
-
-  option: (provided, state) => ({
-    ...provided,
-    backgroundColor: state.isFocused
-      ? "rgba(197, 233, 255, 1)"
-      : "rgb(241, 245, 249)",
-    textAlign: "center",
-  }),
-  multiValue: (provided) => ({
-    ...provided,
-    backgroundColor: "rgba(224, 231, 255,1)",
-  }),
-  placeholder: (provided) => {
-    return {
-      ...provided,
-      textAlign: "center",
-      justifyContent: "center",
-      height: "64px",
-      padding: "10px",
-    };
-  },
-  indicatorSeparator: (provided, state) => ({}),
-  clearIndicator: (provided, state) => ({}),
-  dropdownIndicator: (provided, state) => {
-    return {
-      ...provided,
-      color: "black",
-      transform: state.isFocused ? "rotate(180deg)" : "rotate(0deg)",
-    };
-  },
-};
+import { customStyles } from "../data/customStyles";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
