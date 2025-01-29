@@ -1,40 +1,41 @@
 /* eslint-disable react/prop-types -- bypass proptypes error */
 import { DayCard } from "./DayCard";
-import useGenerateWeeklyDishes from "../../hooks/useGenerateWeeklyDishes";
-import moment from "moment";
 import { useState, useEffect } from "react";
+import moment from "moment";
 import getWeekDays from "../../functions/getWeekDays.js";
 
 //looks at today's date and produce an array of days of the current week
 function getWeekLabels(weekStart) {
-      const days = [];
-    
-      for (let i = 0; i < 7; i += 1) {
+    const days = [];
+
+    for (let i = 0; i < 7; i += 1) {
         //changes DATE data into a STRING and removes time data (ex: "Mon Jan 20 2025")
         days.push(moment(weekStart).add(i, "days").toString().slice(0, 15));
-      }
+    }
 
-      return days;
+    return days;
 }
 
-export function WeeklyMenu({ weekStartDay }) {
-    const currentWeekDishes = useGenerateWeeklyDishes();
-    const [currentWeekDaysLabels, setCurrentWeekDaysLabels] = useState([])
-    const [currentWeekDays, setCurrentWeekDays] = useState([])
+export function WeeklyMenu({ weekStartDay, dishes }) {
+    const [currentWeekDaysLabels, setCurrentWeekDaysLabels] = useState([]);
+    const [currentWeekDays, setCurrentWeekDays] = useState([]);
 
     //populates currentWeekDaysLabels and currentWeekDays at component render
     useEffect(() => {
-        setCurrentWeekDaysLabels(getWeekLabels(weekStartDay))
-        setCurrentWeekDays(getWeekDays(weekStartDay))
-    },[])
+        setCurrentWeekDaysLabels(getWeekLabels(weekStartDay));
+        setCurrentWeekDays(getWeekDays(weekStartDay));
+    }, []);
 
     return (
         <>
             <div className="gap-14 bg-slate-100 p-6">
-                <h2 className="text-center my-8">{getWeekDays(weekStartDay).includes(moment().toISOString().slice(0, 10)) ? "This" : "Upcoming"} Week&apos;s Menu</h2>
+                <h2 className="text-center my-8">
+                    {getWeekDays(weekStartDay).includes(moment().toISOString().slice(0, 10)) ? "This" : "Upcoming"}{" "}
+                    Week&apos;s Menu
+                </h2>
                 <button onClick={() => console.log(currentWeekDays)}>test</button>
                 <div className="grid grid-cols-4 gap-6">
-                    {Array.from(currentWeekDishes).map((dish, i) => (
+                    {Array.from(dishes || []).map((dish, i) => (
                         <DayCard key={i} dish={dish} day={currentWeekDaysLabels[i]} />
                     ))}
                 </div>
