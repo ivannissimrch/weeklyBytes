@@ -18,6 +18,7 @@ function App() {
             children: [
                 {
                     path: "",
+                    loader: dataDishesLoader,
                     element: <Home />,
                 },
                 {
