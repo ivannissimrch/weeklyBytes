@@ -50,6 +50,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
         from: startOfWeek(day, { weekStartsOn: 1 }),
         to: endOfWeek(day, { weekStartsOn: 1 }),
       });
+      // used for data
       setSelectedDaysData(
         cleanUpDates(
           eachDayOfInterval({
@@ -63,6 +64,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
 
   const formatWeekdayName = (day) => format(day, "ccc");
 
+  // default off days
   const [offDays, setOffDays] = useState([
     false,
     false,

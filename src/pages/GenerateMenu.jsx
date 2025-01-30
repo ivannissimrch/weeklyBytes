@@ -23,21 +23,28 @@ export default function GenerateMenu() {
     setMenuDishes();
   }, [selectedDaysFromCalendar, offDaysFromCalendar]);
 
+  // Replaces local storage
   const [generatedWeeklyMenuReplace, setGeneratedWeeklyMenuReplace] =
     useLocalStorage("generatedWeeklyMenu", []);
+
+  // Adds to local storage
   const [generatedWeeklyMenuAdd, setGeneratedWeeklyMenuAdd] = addToLocalStorage(
     "generatedWeeklyMenu",
     []
   );
+
   const storedWeeklyMenu = JSON.parse(
     localStorage.getItem("generatedWeeklyMenu")
   );
 
   const handleGenerate = () => {
+    // (Generate) if local storage is already populated
     if (storedWeeklyMenu) {
+        // (Generate) if a week already has a menu
       if (storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
         alert("This week has already been generated");
       } else {
+        // (Generate) combines dates, off-days, safe-dishes into objects
         const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
           id: date,
           off: offDaysFromCalendar[index] || false,
@@ -50,6 +57,7 @@ export default function GenerateMenu() {
         alert("Menu Generated")
       }
     } else {
+        // (Generate) combines dates, off-days, safe-dishes into objects
       const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
         id: date,
         off: offDaysFromCalendar[index] || false,
@@ -69,12 +77,15 @@ export default function GenerateMenu() {
     );
 
     if (userConfirm) {
+        // (Regenerate) if selected week already has generated menu
       if (storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
+        // (Regenerate) deletes selected week from local storage
         const updatedStoredWeeklyMenu = storedWeeklyMenu.filter(
           (x) => !selectedDaysFromCalendar.includes(x.id)
         );
         setGeneratedWeeklyMenuReplace(updatedStoredWeeklyMenu);
 
+        // combines dates, off-days, safe-dishes into objects
         const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
             id: date,
             off: offDaysFromCalendar[index] || false,
@@ -87,6 +98,7 @@ export default function GenerateMenu() {
           alert("Menu regenerated")
         
       } else {
+        // (Regenerate) if selected week DO NOT have a generated menu
         alert("Selected week's menu has not been generated yet");
       }
     } else {

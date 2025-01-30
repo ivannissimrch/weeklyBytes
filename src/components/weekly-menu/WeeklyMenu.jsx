@@ -30,12 +30,12 @@ function getWeekDays(weekStart) {
 }
 
 export function WeeklyMenu({ weekStartDay }) {
-    const [daysObjectsFromStorage, setDaysObjectsFromStorage] = useState([])
+
     const [currentWeekDaysLabels, setCurrentWeekDaysLabels] = useState([])
     const [currentWeekDays, setCurrentWeekDays] = useState([])
     const [initialReady, setInitialReady] = useState([false])
 
-    //populates currentWeekDaysLabels and currentWeekDays at component render
+    // populates currentWeekDaysLabels and currentWeekDays at component render
     useEffect(() => {
         setCurrentWeekDaysLabels(getWeekLabels(weekStartDay));
         setCurrentWeekDays(getWeekDays(weekStartDay));
@@ -46,6 +46,10 @@ export function WeeklyMenu({ weekStartDay }) {
         localStorage.getItem("generatedWeeklyMenu")
       );
 
+    const [daysObjectsFromStorage, setDaysObjectsFromStorage] = useState([])
+    
+    // runs only after initial useEffect due to dependancy
+    // runs only if local storage is NOT empty
     useEffect(() => {
         if(initialReady && storedWeeklyMenu !== null) {
             const updatedStoredWeeklyMenu = storedWeeklyMenu.filter(
