@@ -3,6 +3,7 @@ import { useLocalStorage } from "./useLocalStorage";
 import { useLoaderData } from "react-router-dom";
 
 import getSafeDishesFromLocal from "../functions/getSafeDishesFromLocal";
+import removeDuplicateDishes from "../functions/removeDuplicateDishes";
 
 export default function useGenerateWeeklyDishes() {
     const fetchDishes = useLoaderData();
@@ -10,7 +11,6 @@ export default function useGenerateWeeklyDishes() {
 
     function setMenuDishes() {
         const safeDishes = getSafeDishesFromLocal();
-
         function randomizeSortSlice(array) {
             console.log(array.length);
             return array.sort(() => Math.random() - 0.5).slice(0, 7);
@@ -23,8 +23,8 @@ export default function useGenerateWeeklyDishes() {
             return;
         } else {
             setDishes({
-                currentWeek: randomizeSortSlice(getSafeDishesFromLocal()),
-                nextWeek: randomizeSortSlice(getSafeDishesFromLocal()),
+                currentWeek: removeDuplicateDishes(safeDishes, randomizeSortSlice(getSafeDishesFromLocal())),
+                nextWeek: removeDuplicateDishes(safeDishes, randomizeSortSlice(getSafeDishesFromLocal())),
             });
         }
     }
