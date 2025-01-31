@@ -80,7 +80,7 @@ export function WeeklyMenu({ weekStartDay }) {
                 <button onClick={() => console.log(currentWeekDays)}>test</button>
                 <div className="grid grid-cols-4 gap-6">
                     {Array.from(daysObjectsFromStorage.length > 0 ? daysObjectsFromStorage : currentWeekDaysLabels).map((object, i) => (
-                        <DayCard key={i} data={object !== undefined ? object : undefined} placeholder={"No"} day={currentWeekDaysLabels[i]} />
+                        <DayCard key={i} data={object !== undefined ? object : undefined} placeholder={"Menu Not Generated"} day={currentWeekDaysLabels[i]} />
                     ))}
                 </div>
             </div>

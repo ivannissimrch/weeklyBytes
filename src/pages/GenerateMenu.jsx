@@ -10,6 +10,7 @@ export default function GenerateMenu() {
   const [offDaysFromCalendar, setOffDaysFromCalendar] = useState([]);
   const [menuDishes, setMenuDishes] = useGenerateWeeklyDishes();
 
+
   const handleSelectedDaysUpdate = (dataArray) => {
     setSelectedDaysFromCalendar(dataArray);
   };
@@ -39,8 +40,8 @@ export default function GenerateMenu() {
 
   const handleGenerate = () => {
     // (Generate) if local storage is already populated
-    if (storedWeeklyMenu) {
-        // (Generate) if a week already has a menu
+    if (storedWeeklyMenu !== null) {
+      // (Generate) if a week already has a menu
       if (storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
         alert("This week has already been generated");
       } else {
@@ -54,10 +55,12 @@ export default function GenerateMenu() {
         console.log(storedWeeklyMenu);
         setGeneratedWeeklyMenuAdd(combinedArray);
 
-        alert("Menu Generated")
+        setMenuDishes();
+
+        alert("Menu Generated");
       }
-    } else {
-        // (Generate) combines dates, off-days, safe-dishes into objects
+    } else { // (Generate) if local storage does not exist
+      // (Generate) combines dates, off-days, safe-dishes into objects
       const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
         id: date,
         off: offDaysFromCalendar[index] || false,
@@ -67,7 +70,9 @@ export default function GenerateMenu() {
       setGeneratedWeeklyMenuAdd(combinedArray);
       console.log(storedWeeklyMenu);
 
-      alert("Menu Generated")
+      setMenuDishes();
+
+      alert("Menu Generated");
     }
   };
 
@@ -77,8 +82,11 @@ export default function GenerateMenu() {
     );
 
     if (userConfirm) {
-        // (Regenerate) if selected week already has generated menu
-      if (storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
+      // used to enable useEffect for randomization in case dates and days off were untouched
+      setMenuDishes();
+
+      // (Regenerate) if selected week already has generated menu
+      if (storedWeeklyMenu && storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
         // (Regenerate) deletes selected week from local storage
         const updatedStoredWeeklyMenu = storedWeeklyMenu.filter(
           (x) => !selectedDaysFromCalendar.includes(x.id)
@@ -87,16 +95,17 @@ export default function GenerateMenu() {
 
         // combines dates, off-days, safe-dishes into objects
         const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
-            id: date,
-            off: offDaysFromCalendar[index] || false,
-            menu: menuDishes[index] || null,
-          }));
-  
-          console.log(storedWeeklyMenu);
-          setGeneratedWeeklyMenuAdd(combinedArray);
+          id: date,
+          off: offDaysFromCalendar[index] || false,
+          menu: menuDishes[index] || null,
+        }));
 
-          alert("Menu regenerated")
-        
+        console.log(storedWeeklyMenu);
+        setGeneratedWeeklyMenuAdd(combinedArray);
+
+        setMenuDishes();
+
+        alert("Menu regenerated");
       } else {
         // (Regenerate) if selected week DO NOT have a generated menu
         alert("Selected week's menu has not been generated yet");

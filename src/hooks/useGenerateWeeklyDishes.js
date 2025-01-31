@@ -11,18 +11,16 @@ export default function useGenerateWeeklyDishes() {
     function setMenuDishes() {
         const safeDishes = getSafeDishesFromLocal();
 
-        function randomizeSortSlice(array) {
-            console.log(array.length);
-            return array.sort(() => Math.random() - 0.5).slice(0, 7);
-        }
+
+
         if (!safeDishes || safeDishes.length === 0) {
             setDishes(
-                randomizeSortSlice(fetchDishes)
+                    fetchDishes.sort(() => Math.random() - 0.5).slice(0, 7)
             );
-            return;
+            
         } else {
             setDishes(
-                randomizeSortSlice(safeDishes)
+                    safeDishes.sort(() => Math.random() - 0.5).slice(0, 7)
             );
         }
     }
