@@ -1,9 +1,11 @@
 import { WeeklyMenu } from "../components/weekly-menu/WeeklyMenu";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import moment from "moment";
 import useGenerateWeeklyDishes from "../hooks/useGenerateWeeklyDishes";
+import jsPDF from "jspdf";
+import { toast } from "react-toastify";
 
 export default function Home() {
     const [menuDishes, setMenuDishes] = useGenerateWeeklyDishes();
@@ -13,6 +15,38 @@ export default function Home() {
         if (!localStorage.getItem("menuDishes")) setMenuDishes();
     }, []);
 
+    const downloadMenuPDF = () => {
+        try {
+            const doc = new jsPDF();
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Weekly Menu", 16, 20);
+    
+            const formatMenuData = (weekData, title, yOffset) => {
+                doc.setFont("helvetica", "bolditalic");
+                doc.setFontSize(12);
+                doc.text(title, 15, yOffset);
+                doc.setFont("helvetica", "normal"); 
+                doc.setFontSize(12);
+    
+                weekData.forEach((dish, index) => {
+                    const day = moment().startOf("isoWeek").add(index, "days").format("dddd");
+                    const dishName = dish ? dish.name : "Day Off";
+                    doc.text(`• ${day}: ${dishName}`, 15, yOffset + (index + 1) * 10);
+                });
+            };
+    
+            formatMenuData(menuDishes.currentWeek, "Current Week", 30);
+            formatMenuData(menuDishes.nextWeek, "Upcoming Week", 120);
+            doc.save("WeeklyMenu.pdf");
+            toast.success("PDF downloaded successfully!");
+    
+        } catch (error) {
+            console.error("PDF Generation Error:", error);
+            toast.error("An error occurred while downloading the PDF.");
+        }
+    };
+    
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-row w-full justify-end">
@@ -27,8 +61,12 @@ export default function Home() {
                     className="bg-blue-400 rounded-3xl p-3 m-3 w-1/6 text-center  hover:bg-gray-200"
                     onClick={() => setMenuDishes()}>
                     Test Regenerate Menu
-                </NavLink>
+                </NavLink> 
             </div>
+            <div className="flex flex-row w-full justify-end mb-1">
+            <FileUploadIcon onClick={downloadMenuPDF} className="cursor-pointer" />
+            </div>
+            
 
             <div className="flex flex-col gap-10">
                 {/* Current Week menu */}
