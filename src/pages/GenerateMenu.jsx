@@ -146,4 +146,5 @@ export default function GenerateMenu() {
       </div>
     </div>
   );
+
 }
