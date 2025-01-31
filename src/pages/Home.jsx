@@ -1,19 +1,14 @@
 import { WeeklyMenu } from "../components/weekly-menu/WeeklyMenu";
 import { NavLink } from "react-router-dom";
-import { addDays, startOfWeek } from 'date-fns';
-import { useEffect } from "react";
+import { addDays, startOfWeek } from "date-fns";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import moment from "moment";
-import useGenerateWeeklyDishes from "../hooks/useGenerateWeeklyDishes";
 import jsPDF from "jspdf";
-import { Slide, ToastContainer, toast } from "react-toastify";
-
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Home() {
-
-
-
     const downloadMenuPDF = () => {
+        const menuDishes = JSON.parse(localStorage.getItem("generatedWeeklyMenu"));
         const showSuccess = () =>
             toast.success("Your menu is downloading!", {
                 theme: "colored",
@@ -29,6 +24,7 @@ export default function Home() {
             doc.text("Weekly Menu", 16, 20);
 
             const formatMenuData = (weekData, title, yOffset) => {
+                console.log(weekData);
                 doc.setFont("helvetica", "bolditalic");
                 doc.setFontSize(12);
                 doc.text(title, 15, yOffset);
@@ -37,13 +33,15 @@ export default function Home() {
 
                 weekData.forEach((dish, index) => {
                     const day = moment().startOf("isoWeek").add(index, "days").format("dddd");
-                    const dishName = dish ? dish.name : "Day Off";
+                    const dishName = dish ? dish.menu.name : "Day Off";
+
                     doc.text(`• ${day}: ${dishName}`, 15, yOffset + (index + 1) * 10);
                 });
             };
 
-            formatMenuData(menuDishes.currentWeek, "Current Week", 30);
-            formatMenuData(menuDishes.nextWeek, "Upcoming Week", 120);
+            formatMenuData(menuDishes, "Current Week", 30);
+            // TODO: The upcoming week does not render correctly:
+            formatMenuData(menuDishes, "Upcoming Week", 120);
             doc.save("WeeklyMenu.pdf");
             showSuccess();
         } catch (error) {
