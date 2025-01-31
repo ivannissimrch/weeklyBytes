@@ -59,14 +59,6 @@ export default function Home() {
                     + Generate Menu
                 </NavLink>
             </div>
-
-            <div className="flex flex-row w-full justify-end">
-                <NavLink
-                    className="bg-blue-400 rounded-3xl p-3 m-3 w-1/6 text-center  hover:bg-gray-200"
-                    onClick={() => setMenuDishes()}>
-                    Test Regenerate Menu
-                </NavLink>
-            </div>
             <div className="flex flex-row w-full justify-end mb-1">
                 <FileUploadIcon onClick={downloadMenuPDF} className="cursor-pointer" />
             </div>
