@@ -21,9 +21,13 @@ export default function Home() {
                 {/* Current Week menu */}
                 <WeeklyMenu weekStartDay={startOfWeek(new Date(), { weekStartsOn: 1 })} />
 
-                {/* Upcoming Week menu */}
-                <WeeklyMenu weekStartDay={startOfWeek(addDays(new Date(), 7), { weekStartsOn: 1 })} />
-            </div>
-        </div>
-    );
+        {/* Upcoming Week menu */}
+        <WeeklyMenu
+          weekStartDay={startOfWeek(addDays(new Date(), 7), {
+            weekStartsOn: 1,
+          })}
+        />
+      </div>
+    </div>
+  );
 }

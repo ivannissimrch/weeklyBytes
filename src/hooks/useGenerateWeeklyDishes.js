@@ -13,7 +13,7 @@ export default function useGenerateWeeklyDishes() {
 
 
 
-        if (!safeDishes || safeDishes.length === 0) {
+        if (safeDishes === null || safeDishes.length === 0) {
             setDishes(
                     fetchDishes.sort(() => Math.random() - 0.5).slice(0, 7)
             );

@@ -1,7 +1,9 @@
+import { AlignHorizontalCenter } from "@mui/icons-material";
+
 export const customStyles = {
   control: (provided) => ({
     ...provided,
-    backgroundColor: "rgba(224, 231, 255,1)",
+    backgroundColor: "rgba(221, 238, 248, 1)",
     textAlign: "center",
     overflow: "hidden",
   }),
@@ -9,27 +11,25 @@ export const customStyles = {
     ...provided,
     textAlign: "center",
     justifyContent: "center",
-    height: "64px",
   }),
 
   option: (provided, state) => ({
     ...provided,
     backgroundColor: state.isFocused
       ? "rgba(197, 233, 255, 1)"
-      : "rgb(241, 245, 249)",
+      : "rgba(221, 238, 248, 1)",
     textAlign: "center",
+    width:"100%"
   }),
   multiValue: (provided) => ({
     ...provided,
-    backgroundColor: "rgba(224, 231, 255,1)",
+    backgroundColor: "rgba(197, 233, 255, 1)",
   }),
   placeholder: (provided) => {
     return {
       ...provided,
       textAlign: "center",
       justifyContent: "center",
-      height: "64px",
-      padding: "10px",
     };
   },
   indicatorSeparator: (provided, state) => ({}),

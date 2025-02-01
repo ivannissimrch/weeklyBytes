@@ -116,9 +116,9 @@ export default function GenerateMenu() {
   };
 
   return (
-    <div className="w-screen">
+    <div className="w-full flex flex-col items-center bg-custom-yellow">
       <h2 className="text-center m-4">Generate Menu</h2>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-11/12 bg-custom-blue">
         <div className="flex flex-col items-center w-full">
           <h2 className="text-center items-center m-3">Select Date</h2>
           <span className="text-center items-center m-2">
