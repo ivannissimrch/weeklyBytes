@@ -1,68 +1,163 @@
-import { useState } from "react";
-import moment from "moment";
+import { useState, useEffect } from "react";
+import {
+  endOfWeek,
+  startOfWeek,
+  isWithinInterval,
+  addDays,
+  eachDayOfInterval,
+  formatISO9075,
+  format,
+} from "date-fns";
 import { DayPicker } from "react-day-picker";
-import getWeekDays from "../functions/getWeekDays.js";
+import "react-day-picker/src/style.css";
+import DaysOff from "./DaysOff";
 
-//returns an object with the start and end of a week by looking at the date selected
-function getWeekRange(date) {
-    return {
-        from: moment(date).startOf("isoWeek").toDate(),
-        to: moment(date).endOf("isoWeek").toDate(),
-    };
-}
+// used for producing dates in ISO format to be used as id
+const cleanUpDates = (days) => {
+  const cleanedUpDays = [];
+  for (let i = 0; i < 7; i += 1) {
+    cleanedUpDays.push(formatISO9075(days[i], { representation: "date" }));
+  }
+  return cleanedUpDays;
+};
 
-export default function Calendar({ onSelectedDaysChange }) {
-    const [hoverRange, setHoverRange] = useState(undefined);
-    const [selectedDays, setSelectedDays] = useState([]);
+export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
+  // defaults highlighted week to next week
+  const [selectedDays, setSelectedDays] = useState({
+    from: startOfWeek(addDays(new Date(), 7), { weekStartsOn: 1 }),
+    to: endOfWeek(addDays(new Date(), 7), { weekStartsOn: 1 }),
+  });
 
-    //takes in selected date to obtain array from getWeekDays to be raised to GenerateMenu
-    const handleDayChange = (date) => {
-        setSelectedDays(getWeekDays(getWeekRange(date).from));
-        onSelectedDaysChange(getWeekDays(getWeekRange(date).from));
-        console.log(getWeekDays(getWeekRange(date).from));
-    };
+  // produces array of dates in ISO format to be used as id
+  const [selectedDaysData, setSelectedDaysData] = useState(
+    cleanUpDates(
+      eachDayOfInterval({
+        start: startOfWeek(addDays(new Date(), 7), { weekStartsOn: 1 }),
+        end: endOfWeek(addDays(new Date(), 7), { weekStartsOn: 1 }),
+      })
+    )
+  );
 
-    const handleDayEnter = (date) => {
-        setHoverRange(getWeekRange(date));
-    };
+  const handleDayClick = (day) => {
+    if (
+      selectedDays &&
+      isWithinInterval(day, { start: selectedDays.from, end: selectedDays.to })
+    ) {
+      setSelectedDays(null); // Clear selection if clicking within the selected week
+    } else {
+      // used by modifier
+      setSelectedDays({
+        from: startOfWeek(day, { weekStartsOn: 1 }),
+        to: endOfWeek(day, { weekStartsOn: 1 }),
+      });
+      // used for data
+      setSelectedDaysData(
+        cleanUpDates(
+          eachDayOfInterval({
+            start: startOfWeek(day, { weekStartsOn: 1 }),
+            end: endOfWeek(day, { weekStartsOn: 1 }),
+          })
+        )
+      );
+    }
+  };
 
-    const handleDayLeave = () => {
-        setHoverRange(undefined);
-    };
+  const formatWeekdayName = (day) => format(day, "ccc");
 
-    const daysAreSelected = selectedDays.length > 0;
+  // default off days
+  const [offDays, setOffDays] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+  ]);
+  const [offDaysDisabled, setOffDaysDisabled] = useState([6, 0]);
 
-    //TO-DO understand this
-    const modifiers = {
-        hoverRange,
-        selectedRange: daysAreSelected && {
-            from: selectedDays[0],
-            to: selectedDays[6],
-        },
-        hoverRangeStart: hoverRange && hoverRange.from,
-        hoverRangeEnd: hoverRange && hoverRange.to,
-        selectedRangeStart: daysAreSelected && selectedDays[0],
-        selectedRangeEnd: daysAreSelected && selectedDays[6],
-    };
+  const handleDaysOffChange = (offDaysArray) => {
+    setOffDays(offDaysArray);
+  };
 
-    return (
-        <div className="w-1/3 space-y-4 p-4 bg-gray-100 rounded-lg shadow">
-            <DayPicker
-                weekStartsOn={1}
-                //disabled={{ before: new Date() }}
-                selectedDays={selectedDays}
-                showOutsideDays={false}
-                modifiers={modifiers}
-                onDayClick={handleDayChange}
-                onDayMouseEnter={handleDayEnter}
-                onDayMouseLeave={handleDayLeave}
-                className=" w-full border border-gray-300 rounded-lg bg-white flex flex-row justify-center"
-            />
-            {selectedDays.length === 7 && (
-                <div className="text-center text-lg font-medium text-gray-800">
-                    {moment(selectedDays[0]).format("LL")} – {moment(selectedDays[6]).format("LL")}
-                </div>
-            )}
-        </div>
+  // updates the disabled weekdays
+  useEffect(() => {
+    setOffDaysDisabled(
+      offDays.flatMap((x, index) =>
+        x ? (index + 1 === 7 ? 0 : index + 1) : []
+      )
     );
+  }, [offDays]);
+
+  // console logs dates when week is clicked
+  useEffect(() => {
+    console.log(selectedDaysData);
+    console.log(offDays);
+  }, [selectedDaysData, offDays]);
+
+  // raises selectedDaysData, offDays to Generate Menu
+  useEffect(() => {
+    onSelectedDaysChange(selectedDaysData);
+    onOffDaysChange(offDays);
+  }, [selectedDaysData, offDays]);
+
+  return (
+    <div className="flex flex-col items-center">
+      <DayPicker
+        numberOfMonths={2}
+        weekStartsOn={1}
+        captionLayout={"dropdown"}
+        selected={selectedDays}
+        formatters={{ formatWeekdayName }}
+        modifiers={{
+          range_start: selectedDays?.from,
+          range_end: selectedDays?.to,
+          range_middle: (date) =>
+            selectedDays
+              ? isWithinInterval(date, {
+                  start: selectedDays.from,
+                  end: selectedDays.to,
+                })
+              : false,
+        }}
+        disabled={[{ dayOfWeek: offDaysDisabled }, { before: new Date() }]}
+        onDayClick={handleDayClick}
+      />
+      {selectedDays && (
+        <p>
+          Week from {selectedDays.from.toLocaleDateString()} to{" "}
+          {selectedDays.to.toLocaleDateString()}
+        </p>
+      )}
+      <DaysOff onDaysOffChange={handleDaysOffChange} />
+
+      <style>
+        {`
+            .rdp-root {
+                --rdp-accent-color: #DDEEF8;
+                --rdp-outside-opacity: 0.35; 
+                --rdp-today-color: blue;
+                --rdp-range_start-color: black;
+                --rdp-range_start-background: #DDEEF8;
+                --rdp-range_start-date-background-color: #DDEEF8;
+                --rdp-range_end-color: black;
+                --rdp-range_end-background: #DDEEF8;
+                --rdp-range_end-date-background-color: #DDEEF8;
+                --rdp-range_middle-background-color: #ddeef8;
+            }
+            .rdp-months {
+              position: relative;
+              display: flex;
+              flex-flow: row wrap;
+              gap: var(--rdp-months-gap);
+              max-width: fit-content;
+            }
+            .rdp-chevron {
+              fill: blue;
+            }
+          }
+        `}
+      </style>
+    </div>
+  );
 }

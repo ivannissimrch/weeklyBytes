@@ -28,6 +28,7 @@ function App() {
                 },
                 {
                     path: "GenerateMenu",
+                    loader: dataDishesLoader,
                     element: <GenerateMenu />,
                 },
             ],
