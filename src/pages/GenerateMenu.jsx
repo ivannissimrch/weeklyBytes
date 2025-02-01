@@ -1,74 +1,150 @@
-import React from 'react'
-import Calendar from '../components/Calendar.jsx'
-import {useState} from 'react'
-
-
+import Calendar from "../components/Calendar.jsx";
+import { useState, useEffect } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage.js";
+import { useLoaderData } from "react-router-dom";
+import { addToLocalStorage } from "../hooks/addToLocalStorage.js";
+import useGenerateWeeklyDishes from "../hooks/useGenerateWeeklyDishes.js";
 
 export default function GenerateMenu() {
+  const [selectedDaysFromCalendar, setSelectedDaysFromCalendar] = useState([]);
+  const [offDaysFromCalendar, setOffDaysFromCalendar] = useState([]);
+  const [menuDishes, setMenuDishes] = useGenerateWeeklyDishes();
 
-    const [selectedDaysFromCalendar, setSelectedDaysFromCalendar] = useState([])
 
-    //initially Sat and Sun are checked as off days
-    const [offDays, setOffDays] = useState([false,false,false,false,false,true,true])
+  const handleSelectedDaysUpdate = (dataArray) => {
+    setSelectedDaysFromCalendar(dataArray);
+  };
 
-    const handleSelectedDaysUpdate = (days) => {
-        setSelectedDaysFromCalendar(days)
+  const handleOffDaysUpdate = (dataArray) => {
+    setOffDaysFromCalendar(dataArray);
+  };
+
+  useEffect(() => {
+    // Temporary -- generates a menu on mount
+    setMenuDishes();
+  }, [selectedDaysFromCalendar, offDaysFromCalendar]);
+
+  // Replaces local storage
+  const [generatedWeeklyMenuReplace, setGeneratedWeeklyMenuReplace] =
+    useLocalStorage("generatedWeeklyMenu", []);
+
+  // Adds to local storage
+  const [generatedWeeklyMenuAdd, setGeneratedWeeklyMenuAdd] = addToLocalStorage(
+    "generatedWeeklyMenu",
+    []
+  );
+
+  const storedWeeklyMenu = JSON.parse(
+    localStorage.getItem("generatedWeeklyMenu")
+  );
+
+  const handleGenerate = () => {
+    // (Generate) if local storage is already populated
+    if (storedWeeklyMenu !== null) {
+      // (Generate) if a week already has a menu
+      if (storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
+        alert("This week has already been generated");
+      } else {
+        // (Generate) combines dates, off-days, safe-dishes into objects
+        const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
+          id: date,
+          off: offDaysFromCalendar[index] || false,
+          menu: menuDishes[index] || null,
+        }));
+
+        console.log(storedWeeklyMenu);
+        setGeneratedWeeklyMenuAdd(combinedArray);
+
+        setMenuDishes();
+
+        alert("Menu Generated");
+      }
+    } else { // (Generate) if local storage does not exist
+      // (Generate) combines dates, off-days, safe-dishes into objects
+      const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
+        id: date,
+        off: offDaysFromCalendar[index] || false,
+        menu: menuDishes[index] || null,
+      }));
+
+      setGeneratedWeeklyMenuAdd(combinedArray);
+      console.log(storedWeeklyMenu);
+
+      setMenuDishes();
+
+      alert("Menu Generated");
     }
+  };
 
-    //updates the offDays array whenever a checkbox is checked/unchecked
-    const handleCheckboxChange = (index) => {
-        setOffDays((prevOffDays) => {
-          const updatedOffDays = [...prevOffDays];
-          updatedOffDays[index] = !updatedOffDays[index];
-          return updatedOffDays;
-        });
-      };
+  const handleRegenerate = () => {
+    const userConfirm = confirm(
+      "Are you sure you want to regenerate the menu?"
+    );
+
+    if (userConfirm) {
+      // used to enable useEffect for randomization in case dates and days off were untouched
+      setMenuDishes();
+
+      // (Regenerate) if selected week already has generated menu
+      if (storedWeeklyMenu && storedWeeklyMenu.find((x) => x.id === selectedDaysFromCalendar[0])) {
+        // (Regenerate) deletes selected week from local storage
+        const updatedStoredWeeklyMenu = storedWeeklyMenu.filter(
+          (x) => !selectedDaysFromCalendar.includes(x.id)
+        );
+        setGeneratedWeeklyMenuReplace(updatedStoredWeeklyMenu);
+
+        // combines dates, off-days, safe-dishes into objects
+        const combinedArray = selectedDaysFromCalendar.map((date, index) => ({
+          id: date,
+          off: offDaysFromCalendar[index] || false,
+          menu: menuDishes[index] || null,
+        }));
+
+        console.log(storedWeeklyMenu);
+        setGeneratedWeeklyMenuAdd(combinedArray);
+
+        setMenuDishes();
+
+        alert("Menu regenerated");
+      } else {
+        // (Regenerate) if selected week DO NOT have a generated menu
+        alert("Selected week's menu has not been generated yet");
+      }
+    } else {
+      return;
+    }
+  };
 
   return (
     <div className="w-screen">
-        <h2 className="text-center m-4">Generate Menu</h2>
-        <div className="flex flex-col w-full">
-            <div className="flex flex-col items-center w-full">
-                <h2 className="text-center items-center m-3">Select Date</h2>
-                <span className="text-center items-center m-2">Choose a week to generate a menu for</span>
-                <Calendar onSelectedDaysChange={handleSelectedDaysUpdate}/>
-            </div>
-            <div className="flex flex-col items-center w-full">
-                <h2 className="text-center items-center m-3">Days Off</h2>
-                <form type="submit" className="flex flex-row justify-center w-full">
-                    <div className="px-3">
-                        <input type="checkbox" id="mon" key="mon" checked={offDays[0]} onChange={() => handleCheckboxChange(0)}/>
-                        <label> Mon</label>
-                    </div>
-                    <div className="px-3">
-                        <input type="checkbox" id="tue" key="tue" checked={offDays[1]} onChange={() => handleCheckboxChange(1)}/>
-                        <label> Tue</label>
-                    </div>
-                    <div className="px-3">
-                        <input type="checkbox" id="wed" key="wed" checked={offDays[2]} onChange={() => handleCheckboxChange(2)}/>
-                        <label> Wed</label>
-                    </div>
-                    <div className="px-3">
-                        <input type="checkbox" id="thu" key="thu" checked={offDays[3]} onChange={() => handleCheckboxChange(3)}/>
-                        <label> Thu</label>
-                    </div>
-                    <div className="px-3">
-                        <input type="checkbox" id="fri" key="fri" checked={offDays[4]} onChange={() => handleCheckboxChange(4)}/>
-                        <label> Fri</label>
-                    </div>
-                    <div className="px-3">
-                        <input type="checkbox" id="sat" key="sat" checked={offDays[5]} onChange={() => handleCheckboxChange(5)}/>
-                        <label> Sat</label>
-                    </div>
-                    <div className="px-3">
-                        <input type="checkbox" id="sun" key="sun" checked={offDays[6]} onChange={() => handleCheckboxChange(6)}/>
-                        <label> Sun</label>
-                    </div>
-                </form>
-            </div>
-        <button onClick={() => {console.log(selectedDaysFromCalendar);console.log(offDays)}}>test</button>
-
+      <h2 className="text-center m-4">Generate Menu</h2>
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col items-center w-full">
+          <h2 className="text-center items-center m-3">Select Date</h2>
+          <span className="text-center items-center m-2">
+            Choose a week to generate a menu for
+          </span>
+          <Calendar
+            onSelectedDaysChange={handleSelectedDaysUpdate}
+            onOffDaysChange={handleOffDaysUpdate}
+          />
         </div>
+        <div className="flex flex-row justify-center w-full">
+          <button
+            onClick={handleGenerate}
+            className="bg-blue-400 text-white rounded-3xl p-3 m-3 w-1/6 text-center  hover:bg-gray-200"
+          >
+            Generate
+          </button>
+          <button
+            onClick={handleRegenerate}
+            className="bg-blue-400 text-white rounded-3xl p-3 m-3 w-1/6 text-center  hover:bg-gray-200"
+          >
+            Regenerate
+          </button>
+        </div>
+      </div>
     </div>
-  )
+  );
+
 }
