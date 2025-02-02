@@ -124,7 +124,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
         onDayClick={handleDayClick}
       />
       {selectedDays && (
-        <p>
+        <p className="w-full bg-white text-center p-2">
           Week from {selectedDays.from.toLocaleDateString()} to{" "}
           {selectedDays.to.toLocaleDateString()}
         </p>
@@ -144,6 +144,9 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
                 --rdp-range_end-background: #DDEEF8;
                 --rdp-range_end-date-background-color: #DDEEF8;
                 --rdp-range_middle-background-color: #ddeef8;
+                background-color: white;
+                padding: 5px
+                
             }
             .rdp-months {
               position: relative;
