@@ -18,7 +18,7 @@ export default function DaysOff({onDaysOffChange}) {
     },)
   return (
     <div className="flex flex-col items-center w-full">
-                <h2 className="text-center items-center m-3">Days Off</h2>
+                <h2 className="text-center text-lg items-center m-3">Days Off</h2>
                 <form type="submit" className="flex flex-row justify-center w-full">
                     <div className="px-3">
                         <input type="checkbox" id="mon" key="mon" checked={offDays[0]} onChange={() => handleCheckboxChange(0)}/>

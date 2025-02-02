@@ -54,7 +54,7 @@ export default function Home() {
         <div className="flex flex-col items-center">
             <div className="flex flex-row w-full justify-end">
                 <NavLink
-                    className="bg-blue-400 text-white rounded-3xl p-3 m-3 w-1/6 text-center  hover:bg-gray-200"
+                    className="bg-button-blue text-white rounded-3xl p-3 m-3 w-1/4 text-center  hover:bg-gray-400"
                     to={"/GenerateMenu"}>
                     + Generate Menu
                 </NavLink>
