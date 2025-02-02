@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import { useEffect, useState } from "react";
 
-export default function DaysOff({onDaysOffChange}) {
+export default function DaysOff({ onDaysOffChange }) {
     //initially Sat and Sun are checked as off days
-    const [offDays, setOffDays] = useState([false,false,false,false,false,true,true])
+    const [offDays, setOffDays] = useState([false, false, false, false, false, true, true]);
 
     //updates the offDays array whenever a checkbox is checked/unchecked
     const handleCheckboxChange = (index) => {
         setOffDays((prevOffDays) => {
-          const updatedOffDays = [...prevOffDays];
-          updatedOffDays[index] = !updatedOffDays[index];
-          return updatedOffDays;
+            const updatedOffDays = [...prevOffDays];
+            updatedOffDays[index] = !updatedOffDays[index];
+            return updatedOffDays;
         });
-      };
+    };
 
     useEffect(() => {
         onDaysOffChange(offDays)
