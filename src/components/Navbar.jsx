@@ -6,7 +6,7 @@ export default function Navbar() {
       <img
         src="/logo.svg"
         alt="Website Logo"
-        className="grid items-center pt-4 w-1/2"
+        className="grid items-center pt-6 w-40"
       />
 
       <nav className="flex-grow text-center text-lg gap-4">
