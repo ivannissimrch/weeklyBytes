@@ -168,7 +168,7 @@ export default function Allergies() {
                     employee.allergies.length > 0 && (
                       <>
                         <button
-                          className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
+                          className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
                           onClick={(event) => {
                             setActiveEditingEmployeeName(employee.name);
                           }}
@@ -180,7 +180,7 @@ export default function Allergies() {
                   {employee.allergies.length > 0 &&
                   employee.name === activeEditingEmployeeName ? (
                     <button
-                      className="w-10  bg-indigo-100 text- flex justify-center items-center h-8 absolute right-2 top-1 "
+                      className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
                       onClick={(event) => {
                         setActiveEditingEmployeeName(null);
                       }}
@@ -192,7 +192,7 @@ export default function Allergies() {
                   )}
                 </span>
                 <button
-                  className="w-10  bg-white text- flex justify-center items-center h-8 rounded"
+                  className="w-1/12 flex justify-center items-center rounded-full bg-custom-blue m-1 h-full p-1"
                   onClick={(event) => {
                     setDeletingEmployee(employee.name);
                     if (employee.allergies.length > 0) {
