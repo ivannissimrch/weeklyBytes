@@ -1,5 +1,3 @@
-import { AlignHorizontalCenter } from "@mui/icons-material";
-
 export const customStyles = {
   control: (provided) => ({
     ...provided,
@@ -19,7 +17,7 @@ export const customStyles = {
       ? "rgba(197, 233, 255, 1)"
       : "rgba(221, 238, 248, 1)",
     textAlign: "center",
-    width:"100%"
+    width: "100%",
   }),
   multiValue: (provided) => ({
     ...provided,
