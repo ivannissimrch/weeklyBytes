@@ -70,7 +70,7 @@ export default function Allergies() {
                                     {isEmployeeMenuOpen !== employee.name && employee.allergies.length > 0 && (
                                         <button
                                             className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
-                                            onClick={(event) => {
+                                            onClick={() => {
                                                 setEditingEmployee(employee.name);
                                                 setIsEmployeeMenuOpen(employee.name);
                                             }}>
@@ -80,7 +80,7 @@ export default function Allergies() {
                                     {employee.allergies.length > 0 && employee.name === editingEmployee ? (
                                         <button
                                             className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
-                                            onClick={(event) => {
+                                            onClick={() => {
                                                 setEditingEmployee(null);
                                             }}>
                                             <SaveOutlinedIcon fontSize="medium" />
@@ -92,7 +92,7 @@ export default function Allergies() {
 
                                 <button
                                     className="w-1/12 flex justify-center items-center rounded-full bg-custom-blue m-1 h-full p-1"
-                                    onClick={(event) => deleteAllergies(employee)}
+                                    onClick={() => deleteAllergies(employee)}
                                     title="Delete all allergies">
                                     <DeleteIcon fontSize="medium" />
                                 </button>

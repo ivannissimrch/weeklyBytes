@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import { DayPicker } from "react-day-picker";
 import { useEffect } from "react";
 
