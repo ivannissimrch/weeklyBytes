@@ -60,15 +60,15 @@ export function WeeklyMenu({ weekStartDay }) {
 
     return (
         <>
-            <div className="gap-14 bg-slate-100 p-6">
-                <h2 className="text-center my-8">
+            <div className="flex flex-col items-center gap-4">
+                <h2 className="text-center text-2xl">
                     {getWeekDays(weekStartDay).includes(formatISO9075(new Date(), { representation: "date" }))
                         ? "This"
                         : "Upcoming"}{" "}
                     Week&apos;s Menu
                 </h2>
-                <button onClick={() => console.log(currentWeekDays)}>test</button>
-                <div className="grid grid-cols-4 gap-6">
+
+                <div className="grid grid-cols-4 w-full gap-5">
                     {Array.from(daysObjectsFromStorage.length > 0 ? daysObjectsFromStorage : currentWeekDaysLabels).map(
                         (object, i) => (
                             <DayCard

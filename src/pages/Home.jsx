@@ -1,13 +1,13 @@
 import { WeeklyMenu } from "../components/weekly-menu/WeeklyMenu";
 import { NavLink } from "react-router-dom";
-import { addDays, startOfWeek } from "date-fns";
-import { ToastContainer } from "react-toastify";
-
+import { addDays, startOfWeek, formatISO9075, format} from "date-fns";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
+import jsPDF from "jspdf";
+import { ToastContainer, toast } from "react-toastify";
 import generatePDF from "../functions/generatePDF";
 
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-
 export default function Home() {
+   
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-row w-full justify-end">
@@ -18,13 +18,15 @@ export default function Home() {
                 </NavLink>
             </div>
             <div className="flex flex-row w-full justify-end mb-1">
-                <FileUploadIcon onClick={() => generatePDF()} className="cursor-pointer" />
+                <FileUploadIcon onClick={generatePDF} className="cursor-pointer" />
             </div>
 
-            <div className="flex flex-col gap-10">
-                <ToastContainer />
-                {/* Current Week menu */}
-                <WeeklyMenu weekStartDay={startOfWeek(new Date(), { weekStartsOn: 1 })} />
+      <div className="flex flex-col gap-10">
+        <ToastContainer />
+        {/* Current Week menu */}
+        <WeeklyMenu
+          weekStartDay={startOfWeek(new Date(), { weekStartsOn: 1 })}
+        />
 
         {/* Upcoming Week menu */}
         <WeeklyMenu
