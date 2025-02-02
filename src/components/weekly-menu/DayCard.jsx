@@ -16,11 +16,11 @@ export function DayCard({ data, day, placeholder }) {
                 <p className="text-center text-xs">{data.menu.calories}kcal</p>
               </div>
             ) : (
-              <p className="text-lg">Day Off</p>
+              <p className="text-lg text-center">Day Off</p>
             )}
           </div>
         ) : (
-          <p className="text-lg">{placeholder}</p>
+          <p className="text-lg text-center">{placeholder}</p>
         )}
       </div>
     </div>
