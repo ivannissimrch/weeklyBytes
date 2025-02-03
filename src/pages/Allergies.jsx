@@ -111,10 +111,10 @@ export default function Allergies() {
       <section className="flex flex-col w-full items-center">
         <ul className="flex flex-col w-4/5 items-center gap-4 text-lg">
           <li className="flex w-full items-center  gap-4">
-            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center ">
+            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
               Employee Name
             </span>
-            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center">
+            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
               Allergy
             </span>
           </li>
@@ -123,11 +123,11 @@ export default function Allergies() {
               className="flex w-full justify-start items-center  gap-4"
               key={employee.id}
             >
-              <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center ">
+              <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
                 {employee.name}
               </span>
               <div className="w-1/2 flex justify-between items-center">
-                <span className="w-11/12 bg-custom-blue relative">
+                <span className="w-11/12 bg-custom-blue relative shadow-md">
                   <Select
                     styles={customStyles}
                     onChange={(selectedOptions, actionMeta) => {
@@ -168,31 +168,31 @@ export default function Allergies() {
                     employee.allergies.length > 0 && (
                       <>
                         <button
-                          className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
+                          className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2 "
                           onClick={(event) => {
                             setActiveEditingEmployeeName(employee.name);
                           }}
                         >
-                          <ModeEditOutlineOutlinedIcon fontSize="large" />
+                          <ModeEditOutlineOutlinedIcon fontSize="medium" />
                         </button>
                       </>
                     )}
                   {employee.allergies.length > 0 &&
                   employee.name === activeEditingEmployeeName ? (
                     <button
-                      className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
+                      className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2"
                       onClick={(event) => {
                         setActiveEditingEmployeeName(null);
                       }}
                     >
-                      <SaveOutlinedIcon fontSize="large" />
+                      <SaveOutlinedIcon fontSize="medium" />
                     </button>
                   ) : (
                     ""
                   )}
                 </span>
                 <button
-                  className="w-1/12 flex justify-center items-center rounded-full bg-custom-blue m-1 h-full p-1"
+                  className="w-1/12 flex flex-row justify-center items-center "
                   onClick={(event) => {
                     setDeletingEmployee(employee.name);
                     if (employee.allergies.length > 0) {
