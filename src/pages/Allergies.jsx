@@ -7,12 +7,13 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
 
 export default function Allergies() {
+  const selectRef = useRef(null);
   const fetchDishes = useLoaderData();
   const [employeesData, setEmployeesData] = useLocalStorage(
     "employeesData",
@@ -130,8 +131,9 @@ export default function Allergies() {
               <div className="w-1/2 flex justify-between items-center">
                 <span className="w-11/12 bg-custom-blue relative">
                   <Select
+                    ref={selectRef}
                     onBlur={() => {
-                      console.log("blue");
+                      console.log("blur, close menu");
                       setOpenDropDown(false);
                     }}
                     styles={customStyles}
@@ -182,6 +184,7 @@ export default function Allergies() {
                           onClick={(event) => {
                             setActiveEditingEmployeeName(employee.name);
                             setOpenDropDown(true);
+                            selectRef.current.focus();
                           }}
                         >
                           <ModeEditOutlineOutlinedIcon fontSize="large" />
@@ -194,6 +197,7 @@ export default function Allergies() {
                       className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
                       onClick={(event) => {
                         setActiveEditingEmployeeName(null);
+                        ///save changes only when cliking save
                       }}
                     >
                       <SaveOutlinedIcon fontSize="large" />
