@@ -29,6 +29,7 @@ export default function Allergies() {
   const [deletingEmployee, setDeletingEmployee] = useState(null);
   const [showDeleteItemModal, setShowDeleteItemModal] = useState(false);
   const [optionsSelected, setOptionsSelected] = useState(null);
+  const [openDropDown, setOpenDropDown] = useState(false);
 
   function handleClosingDeleteAllDialog(agree) {
     setShowDeleteAllModal(false);
@@ -129,8 +130,13 @@ export default function Allergies() {
               <div className="w-1/2 flex justify-between items-center">
                 <span className="w-11/12 bg-custom-blue relative">
                   <Select
+                    onBlur={() => {
+                      console.log("blue");
+                      setOpenDropDown(false);
+                    }}
                     styles={customStyles}
                     onChange={(selectedOptions, actionMeta) => {
+                      console.log(actionMeta);
                       setActiveEditingEmployeeName(employee.name);
                       if (actionMeta.removedValue) {
                         setShowDeleteItemModal(true);
@@ -140,7 +146,10 @@ export default function Allergies() {
                         updateEmployeeAllergies(employee, selectedOptions);
                       }
                     }}
-                    menuIsOpen={activeEditingEmployeeName === employee.name}
+                    menuIsOpen={
+                      activeEditingEmployeeName === employee.name &&
+                      openDropDown
+                    }
                     closeMenuOnSelect={false}
                     isMulti
                     options={ALLERGENS}
@@ -153,6 +162,7 @@ export default function Allergies() {
                     }
                     onMenuOpen={() => {
                       setActiveEditingEmployeeName(employee.name);
+                      setOpenDropDown(true);
                     }}
                     onMenuClose={() => {}}
                     components={{
@@ -171,6 +181,7 @@ export default function Allergies() {
                           className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
                           onClick={(event) => {
                             setActiveEditingEmployeeName(employee.name);
+                            setOpenDropDown(true);
                           }}
                         >
                           <ModeEditOutlineOutlinedIcon fontSize="large" />
