@@ -2,6 +2,13 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
+        screens: {
+            'md': '640px',
+            // => @media (min-width: 640px) { ... }
+      
+            'lg': '1024px',
+            // => @media (min-width: 1024px) { ... }
+          },
         extend: {
             colors: {
                 "custom-yellow": "rgba(255, 254, 241, 1)",

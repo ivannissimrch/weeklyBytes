@@ -12,6 +12,8 @@ import { useState } from "react";
 import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { NavLink } from "react-router-dom";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -109,14 +111,23 @@ export default function Allergies() {
 
   return (
     <section className="flex flex-col items-center w-full">
-      <h2 className="text-center m-4 text-2xl font-normal">Allergies</h2>{" "}
+      <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-full">
+        <NavLink
+          className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
+          to={"/"}
+        >
+          <ArrowBackIcon fontSize="medium" className="" />
+          <span className="">Return to Home</span>
+        </NavLink>
+        <h2 className="text-center text-2xl ">Allergies</h2>
+      </div>
       <section className="flex flex-col w-full items-center">
         <ul className="flex flex-col w-4/5 items-center gap-4 text-lg">
           <li className="flex w-full items-center  gap-4">
-            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center ">
+            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
               Employee Name
             </span>
-            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center">
+            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
               Allergy
             </span>
           </li>
@@ -125,11 +136,11 @@ export default function Allergies() {
               className="flex w-full justify-start items-center  gap-4"
               key={employee.id}
             >
-              <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center ">
+              <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
                 {employee.name}
               </span>
               <div className="w-1/2 flex justify-between items-center">
-                <span className="w-11/12 bg-custom-blue relative">
+                <span className="w-11/12 bg-custom-blue relative shadow-md">
                   <Select
                     onBlur={() => {
                       setOpenDropDown(false);
@@ -180,9 +191,10 @@ export default function Allergies() {
                         ),
                     }}
                   />
+
                 </span>
                 <button
-                  className="w-1/12 flex justify-center items-center rounded-full bg-custom-blue m-1 h-full p-1"
+                  className="w-1/12 flex flex-row justify-center items-center text-black hover:text-[red]"
                   onClick={(event) => {
                     setDeletingEmployee(employee.name);
                     if (employee.allergies.length > 0) {
