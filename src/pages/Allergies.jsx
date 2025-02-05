@@ -3,8 +3,9 @@ import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
+import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
 import { useState } from "react";
@@ -24,13 +25,14 @@ export default function Allergies() {
     "safeDishes",
     fetchDishes
   );
-  console.log(safeDishes);
+
   const [activeEditingEmployeeName, setActiveEditingEmployeeName] =
     useState(null);
   const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
   const [deletingEmployee, setDeletingEmployee] = useState(null);
   const [showDeleteItemModal, setShowDeleteItemModal] = useState(false);
   const [optionsSelected, setOptionsSelected] = useState(null);
+  const [openDropDown, setOpenDropDown] = useState(false);
 
   function handleClosingDeleteAllDialog(agree) {
     setShowDeleteAllModal(false);
@@ -140,6 +142,9 @@ export default function Allergies() {
               <div className="w-1/2 flex justify-between items-center">
                 <span className="w-11/12 bg-custom-blue relative shadow-md">
                   <Select
+                    onBlur={() => {
+                      setOpenDropDown(false);
+                    }}
                     styles={customStyles}
                     onChange={(selectedOptions, actionMeta) => {
                       setActiveEditingEmployeeName(employee.name);
@@ -151,56 +156,42 @@ export default function Allergies() {
                         updateEmployeeAllergies(employee, selectedOptions);
                       }
                     }}
-                    menuIsOpen={activeEditingEmployeeName === employee.name}
+                    menuIsOpen={
+                      activeEditingEmployeeName === employee.name &&
+                      openDropDown
+                    }
                     closeMenuOnSelect={false}
                     isMulti
                     options={ALLERGENS}
                     value={employee.allergies}
                     placeholder={"[Allergy]"}
                     isClearable={false}
-                    isDisabled={
-                      employee.allergies.length > 0 &&
-                      !activeEditingEmployeeName
-                    }
                     onMenuOpen={() => {
                       setActiveEditingEmployeeName(employee.name);
+                      setOpenDropDown(true);
                     }}
                     onMenuClose={() => {}}
                     components={{
                       MultiValueRemove: (props) =>
+                        openDropDown &&
                         activeEditingEmployeeName === employee.name ? (
                           <components.MultiValueRemove {...props}>
                             <DeleteIcon />
                           </components.MultiValueRemove>
                         ) : null,
+                      DropdownIndicator: (props) =>
+                        employee.allergies.length > 0 ? (
+                          <components.DropdownIndicator {...props}>
+                            <ModeEditOutlineOutlinedIcon />
+                          </components.DropdownIndicator>
+                        ) : activeEditingEmployeeName === employee.name ? (
+                          <ArrowDropUpOutlinedIcon />
+                        ) : (
+                          <ArrowDropDownOutlinedIcon />
+                        ),
                     }}
                   />
-                  {activeEditingEmployeeName !== employee.name &&
-                    employee.allergies.length > 0 && (
-                      <>
-                        <button
-                          className="bg-custom-blue flex justify-center text-black hover:text-button-blue flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2 "
-                          onClick={(event) => {
-                            setActiveEditingEmployeeName(employee.name);
-                          }}
-                        >
-                          <ModeEditOutlineOutlinedIcon fontSize="medium" />
-                        </button>
-                      </>
-                    )}
-                  {employee.allergies.length > 0 &&
-                  employee.name === activeEditingEmployeeName ? (
-                    <button
-                      className="bg-custom-blue flex justify-center text-black hover:text-button-blue flex justify-center items-center h-8 absolute right-2 top-1/2 transform -translate-y-1/2 "
-                      onClick={(event) => {
-                        setActiveEditingEmployeeName(null);
-                      }}
-                    >
-                      <SaveOutlinedIcon fontSize="medium" />
-                    </button>
-                  ) : (
-                    ""
-                  )}
+
                 </span>
                 <button
                   className="w-1/12 flex flex-row justify-center items-center text-black hover:text-[red]"
