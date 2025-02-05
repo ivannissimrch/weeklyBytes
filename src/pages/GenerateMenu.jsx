@@ -20,7 +20,7 @@ export default function GenerateMenu() {
 
   return (
     <div className="w-full flex flex-col items-center bg-custom-yellow">
-      <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-11/12">
+      <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-full">
         <NavLink
           className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
           to={"/"}
@@ -30,7 +30,7 @@ export default function GenerateMenu() {
         </NavLink>
         <h2 className="text-center text-2xl ">Generate Menu</h2>
       </div>
-      <div className="flex flex-col w-11/12 bg-custom-blue py-3">
+      <div className="flex flex-col w-full bg-custom-blue py-3">
         <div className="flex flex-col items-center w-full">
           <h2 className="text-center text-lg items-center m-3">Select Date</h2>
           <span className="text-center items-center m-2 ">
