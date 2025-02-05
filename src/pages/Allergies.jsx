@@ -31,7 +31,6 @@ export default function Allergies() {
   const [showDeleteItemModal, setShowDeleteItemModal] = useState(false);
   const [optionsSelected, setOptionsSelected] = useState(null);
   const [openDropDown, setOpenDropDown] = useState(false);
-  const [arrowIcon, setArrowIcon] = useState(<ArrowDropDownOutlinedIcon />);
 
   function handleClosingDeleteAllDialog(agree) {
     setShowDeleteAllModal(false);
@@ -159,11 +158,8 @@ export default function Allergies() {
                     onMenuOpen={() => {
                       setActiveEditingEmployeeName(employee.name);
                       setOpenDropDown(true);
-                      setArrowIcon(<ArrowDropUpOutlinedIcon />);
                     }}
-                    onMenuClose={() => {
-                      setArrowIcon(<ArrowDropDownOutlinedIcon />);
-                    }}
+                    onMenuClose={() => {}}
                     components={{
                       MultiValueRemove: (props) =>
                         openDropDown &&
@@ -177,8 +173,10 @@ export default function Allergies() {
                           <components.DropdownIndicator {...props}>
                             <ModeEditOutlineOutlinedIcon />
                           </components.DropdownIndicator>
+                        ) : activeEditingEmployeeName === employee.name ? (
+                          <ArrowDropUpOutlinedIcon />
                         ) : (
-                          arrowIcon
+                          <ArrowDropDownOutlinedIcon />
                         ),
                     }}
                   />
