@@ -7,14 +7,14 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative py-5 w-screen grid grid-cols-3 justify-center items-center">
+    <div className="relative py-5 w-screen md:w-[95%] lg:w-[80%] grid grid-cols-3 justify-center items-center">
       <NavLink
-        className="w-fit  col-start-2 md:col-start-1 justify-self-center"
+        className="w-fit col-start-2 md:col-start-1 justify-self-start"
         to={"/"}
       >
         <img src="/logo.svg" alt="Website Logo" className="w-[200px] md:w-[160px]" />
       </NavLink>
-      <div className="col-start-3 w-fit m-2 absolute right-2 md:hidden">
+      <div className="col-start-3 w-fit  absolute right-2 md:hidden">
         <button onClick={() => setIsOpen(!isOpen)} className="p-1">
           <MenuIcon fontSize="large" />
         </button>
@@ -42,15 +42,15 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`fixed top-0 left-0 h-fit py-10 w-full bg-white shadow-lg text-center z-10  md:hidden ${
+        className={`fixed top-0 left-0 h-fit py-9 w-screen bg-white shadow-lg text-center z-10  md:hidden ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } `}
       >
-        <div className="px-4 w-full grid grid-cols-3 items-center text-xl font-bold">
-          <span className="test-bold col-start-2">Menu</span>
+        <div className=" w-full grid grid-cols-3 items-center text-xl font-bold">
+          <span className="text-bold col-start-2">Menu</span>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-1 col-start-3 absolute right-4 w-fit"
+            className="col-start-3 w-fit  absolute right-3"
           >
             <CloseIcon fontSize="large" />
           </button>

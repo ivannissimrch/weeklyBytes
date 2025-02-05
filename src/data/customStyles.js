@@ -36,7 +36,7 @@ export const customStyles = {
     return {
       ...provided,
       color: "black",
-      transform: state.isFocused ? "rotate(180deg)" : "rotate(0deg)",
+      opacity: state.isFocused ? "0" : "100",
     };
   },
 };
