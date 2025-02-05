@@ -3,17 +3,17 @@ import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
+import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import Select, { components } from "react-select";
 import identifySafeDishes from "../functions/identifySafeDishes";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
 
 export default function Allergies() {
-  const selectRef = useRef(null);
   const fetchDishes = useLoaderData();
   const [employeesData, setEmployeesData] = useLocalStorage(
     "employeesData",
@@ -23,7 +23,7 @@ export default function Allergies() {
     "safeDishes",
     fetchDishes
   );
-  console.log(safeDishes);
+
   const [activeEditingEmployeeName, setActiveEditingEmployeeName] =
     useState(null);
   const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
@@ -31,6 +31,7 @@ export default function Allergies() {
   const [showDeleteItemModal, setShowDeleteItemModal] = useState(false);
   const [optionsSelected, setOptionsSelected] = useState(null);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [arrowIcon, setArrowIcon] = useState(<ArrowDropDownOutlinedIcon />);
 
   function handleClosingDeleteAllDialog(agree) {
     setShowDeleteAllModal(false);
@@ -131,14 +132,11 @@ export default function Allergies() {
               <div className="w-1/2 flex justify-between items-center">
                 <span className="w-11/12 bg-custom-blue relative">
                   <Select
-                    ref={selectRef}
                     onBlur={() => {
-                      console.log("blur, close menu");
                       setOpenDropDown(false);
                     }}
                     styles={customStyles}
                     onChange={(selectedOptions, actionMeta) => {
-                      console.log(actionMeta);
                       setActiveEditingEmployeeName(employee.name);
                       if (actionMeta.removedValue) {
                         setShowDeleteItemModal(true);
@@ -158,53 +156,32 @@ export default function Allergies() {
                     value={employee.allergies}
                     placeholder={"[Allergy]"}
                     isClearable={false}
-                    isDisabled={
-                      employee.allergies.length > 0 &&
-                      !activeEditingEmployeeName
-                    }
                     onMenuOpen={() => {
                       setActiveEditingEmployeeName(employee.name);
                       setOpenDropDown(true);
+                      setArrowIcon(<ArrowDropUpOutlinedIcon />);
                     }}
-                    onMenuClose={() => {}}
+                    onMenuClose={() => {
+                      setArrowIcon(<ArrowDropDownOutlinedIcon />);
+                    }}
                     components={{
                       MultiValueRemove: (props) =>
+                        openDropDown &&
                         activeEditingEmployeeName === employee.name ? (
                           <components.MultiValueRemove {...props}>
                             <DeleteIcon />
                           </components.MultiValueRemove>
                         ) : null,
+                      DropdownIndicator: (props) =>
+                        employee.allergies.length > 0 ? (
+                          <components.DropdownIndicator {...props}>
+                            <ModeEditOutlineOutlinedIcon />
+                          </components.DropdownIndicator>
+                        ) : (
+                          arrowIcon
+                        ),
                     }}
                   />
-                  {activeEditingEmployeeName !== employee.name &&
-                    employee.allergies.length > 0 && (
-                      <>
-                        <button
-                          className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
-                          onClick={(event) => {
-                            setActiveEditingEmployeeName(employee.name);
-                            setOpenDropDown(true);
-                            selectRef.current.focus();
-                          }}
-                        >
-                          <ModeEditOutlineOutlinedIcon fontSize="large" />
-                        </button>
-                      </>
-                    )}
-                  {employee.allergies.length > 0 &&
-                  employee.name === activeEditingEmployeeName ? (
-                    <button
-                      className="bg-custom-blue flex justify-center text- flex justify-center items-center h-8 absolute right-2 top-2 "
-                      onClick={(event) => {
-                        setActiveEditingEmployeeName(null);
-                        ///save changes only when cliking save
-                      }}
-                    >
-                      <SaveOutlinedIcon fontSize="large" />
-                    </button>
-                  ) : (
-                    ""
-                  )}
                 </span>
                 <button
                   className="w-1/12 flex justify-center items-center rounded-full bg-custom-blue m-1 h-full p-1"
