@@ -1,15 +1,26 @@
 import { NavLink } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
 export default function Navbar() {
-  return (
-    <div className="grid grid-cols-3 items-center w-full">
-      <img
-        src="/logo.svg"
-        alt="Website Logo"
-        className="grid items-center pt-6 w-40"
-      />
+  const [isOpen, setIsOpen] = useState(false);
 
-      <nav className="flex-grow text-center text-lg gap-4">
+  return (
+    <div className="relative py-5 w-screen grid grid-cols-3 justify-center items-center">
+      <NavLink
+        className="w-fit  col-start-2 md:col-start-1 justify-self-center"
+        to={"/"}
+      >
+        <img src="/logo.svg" alt="Website Logo" className="w-[200px] md:w-[160px]" />
+      </NavLink>
+      <div className="col-start-3 w-fit m-2 absolute right-2 md:hidden">
+        <button onClick={() => setIsOpen(!isOpen)} className="p-1">
+          <MenuIcon fontSize="large" />
+        </button>
+      </div>
+
+      <nav className="hidden md:col-start-2 md:flex md:justify-center md:text-lg md:text-center md:gap-4">
         <ul className="inline-flex space-x-6">
           <li>
             <NavLink
@@ -29,6 +40,42 @@ export default function Navbar() {
           </li>
         </ul>
       </nav>
+
+      <div
+        className={`fixed top-0 left-0 h-fit py-10 w-full bg-white shadow-lg text-center z-10  md:hidden ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } `}
+      >
+        <div className="px-4 w-full grid grid-cols-3 items-center text-xl font-bold">
+          <span className="test-bold col-start-2">Menu</span>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-1 col-start-3 absolute right-4 w-fit"
+          >
+            <CloseIcon fontSize="large" />
+          </button>
+        </div>
+        <ul className="flex flex-col gap-4 pt-6 text-lg">
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "underline" : "")}
+              to="/"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "underline" : "")}
+              to="/Allergies"
+              onClick={() => setIsOpen(false)}
+            >
+              Allergies
+            </NavLink>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

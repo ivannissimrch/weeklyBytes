@@ -2,9 +2,9 @@
 
 export function DayCard({ data, day, placeholder }) {
   return (
-    <div className="flex flex-col w-54 h-56 items-center">
+    <div className="flex flex-col w-full h-fit md:w-54 md:h-[300px] items-center">
       <h3 className="text-center text-md mb-1">{day}</h3>
-      <div className="flex flex-row items-center justify-center bg-custom-blue w-full h-full p-4 shadow-lg z-10">
+      <div className="flex flex-row items-center justify-center bg-custom-blue w-full h-full shadow-lg z-2">
         {typeof data === "object" ? (
           <div>
             {data.off === false ? (
