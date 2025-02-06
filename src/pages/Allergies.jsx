@@ -15,7 +15,7 @@ import DeleteItemModal from "../components/DeleteItemModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NavLink } from "react-router-dom";
-import generatePDF from "../functions/generatePDF";
+import generateAllergiesPDF from "../functions/generateAllergiesPDF";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -123,11 +123,11 @@ export default function Allergies() {
         </NavLink>
         <h2 className="text-center text-2xl ">Allergies</h2>
         <div className="justify-self-end">
-            <button type="button" className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer">
-              Export Menu 
+            <button onClick={generateAllergiesPDF} type="button" className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer">
+              Export Allergies
               <FileUploadIcon fontSize="small" className="cursor-pointer" />
             </button>
-            <button type="button" className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]">
+            <button onClick={generateAllergiesPDF} type="button" className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]">
               <FileUploadIcon fontSize="medium" className="cursor-pointer" />
             </button>
         </div>
