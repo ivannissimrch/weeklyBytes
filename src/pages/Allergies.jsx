@@ -16,6 +16,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NavLink } from "react-router-dom";
 import generateAllergiesPDF from "../functions/generateAllergiesPDF";
+import { ToastContainer} from "react-toastify";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -113,6 +114,7 @@ export default function Allergies() {
 
   return (
     <section className="flex flex-col items-center w-full">
+      <ToastContainer />
       <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-full">
         <NavLink
           className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
