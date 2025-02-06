@@ -55,7 +55,7 @@ export default function generateAllergiesPDF() {
                 }
                 //doc.line(10, 33 + index * 20, pageWidth - 10, 33 + index * 20);
             });
-            doc.save("allergies.pdf");
+            doc.save("Employee Allergies.pdf");
             showSuccess();
         } else {
             showError();
