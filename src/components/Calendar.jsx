@@ -38,7 +38,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
   const [tooltip, setTooltip] = useState(null);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full md:w-fit">
       <DayPicker
         numberOfMonths={2}
         weekStartsOn={1}
@@ -63,7 +63,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
         onDayClick={handleDayClick}
       />
       {selectedDays && (
-        <p className="w-full bg-button-blue text-md text-center text-white p-2 font-semibold">
+        <p className="w-[100%] md:w-full  bg-button-blue text-md text-center text-white p-2 font-semibold">
           Selected Week: {selectedDays.from.toLocaleDateString()} ~{"  "}
           {selectedDays.to.toLocaleDateString()}
         </p>
@@ -72,6 +72,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
 
       <style>
         {`
+          
             .rdp-root {
                 --rdp-accent-color: #DDEEF8;
                 --rdp-disabled-opacity: 0.3; 
@@ -85,12 +86,19 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
                 --rdp-range_end-date-background-color: none;
                 --rdp-range_middle-background-color:#C5E9FF;
                 background-color: white;
-                padding: 20px;
                 display: flex;
                 flex-flow: row wrap;
                 justify-content: center;
+                padding: 15px;
+                --rdp-day-height: 30px;
+                --rdp-day-width: 30px;
+                --rdp-day_button-width: 30px;
             }
-
+            .rdp-day{
+              width: 30px;
+              height: 40px;
+              padding: 8px;
+            }
             .rdp-day:hover {
             color: blue
             }
@@ -104,7 +112,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
             .rdp-months {
               position: relative;
               display: flex;
-              flex-flow: row wrap;
+              flex-flow: row nowrap;
               justify-content: center;
               gap: var(--rdp-months-gap);
               max-width: fit-content;
@@ -121,7 +129,31 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
               border-top-right-radius: 50%;
               border-bottom-right-radius: 50%;
             }
+          @media (width <= 746px) {
+            .rdp-root {
+              padding: 15px;
+              --rdp-day-height: 40px;
+              --rdp-day-width: 30px;
+              --rdp-day_button-width: 30px;
+            }
+            .rdp-day{
+              width: 30px;
+              height: 40px;
+            }
+            .rdp-dropdowns{
+              font-size:15px
+            }
+            .rdp-months {
+              position: relative;
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+              gap: var(--rdp-months-gap);
+              max-width: fit-content;
+              width: 100%
+            }
           }
+          
         `}
       </style>
     </div>

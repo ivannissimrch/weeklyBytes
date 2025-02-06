@@ -59,7 +59,7 @@ export function WeeklyMenu({ weekStartDay }) {
     }, [initialReady]);
 
     return (
-        <div className="flex flex-col items-around my-5 py-4 px-2 w-full bg-custom-blue">
+        <div className="flex flex-col items-around mt-1 mb-5 py-4 px-2 w-full bg-custom-blue">
 
                 <h2 className="text-center text-md md:text-2xl pb-5 underline">
                     {getWeekDays(weekStartDay).includes(formatISO9075(new Date(), { representation: "date" }))
