@@ -10,20 +10,20 @@ export default function ModalC({ onAgree, onDisagree }) {
     return (
         <>
             <Dialog
-                sx={{ color: "rgb(0,82,204)" }}
-                open="true"
+                sx={{ color: "white" }}
+                open
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
-                <DialogContent sx={{ backgroundColor: "rgb(0,82,204)" }}>
-                    <DialogContentText id="alert-dialog-description" sx={{ color: "white", fontWeight: "bold" }}>
+                <DialogContent sx={{ backgroundColor: "white"}}>
+                    <DialogContentText id="alert-dialog-description" sx={{ color: "black"}}>
                         Regenerate menu for selected week?
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions sx={{ backgroundColor: "rgb(0,82,204)" }}>
-                    <Button sx={{ color: "white" }} onClick={onDisagree}>
+                <DialogActions sx={{ backgroundColor: "white"}}>
+                    <Button sx={{ color: "red"}} onClick={onDisagree}>
                         No
                     </Button>
-                    <Button sx={{ color: "white" }} onClick={onAgree} autoFocus>
+                    <Button sx={{color: "black"}} onClick={onAgree} autoFocus>
                         Yes
                     </Button>
                 </DialogActions>

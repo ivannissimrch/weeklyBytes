@@ -7,7 +7,7 @@ import useCalendar from "../hooks/useCalendar";
 
 import "react-day-picker/src/style.css";
 
-export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
+export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrueArrayChange }) {
   const {
     handleDayClick,
     handleDaysOffChange,
@@ -23,12 +23,16 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange }) {
   useEffect(() => {
     console.log(selectedDaysData);
     console.log(offDays);
+    // used for "all days off" case
+    console.log(offDays.filter((x) => x === true))
   }, [selectedDaysData, offDays]);
 
   // raises selectedDaysData, offDays to Generate Menu
   useEffect(() => {
     onSelectedDaysChange(selectedDaysData);
     onOffDaysChange(offDays);
+    // used for "all days off" case
+    onTrueArrayChange(offDays.filter((x) => x === true))
   }, [selectedDaysData, offDays]);
 
   const [tooltip, setTooltip] = useState(null);

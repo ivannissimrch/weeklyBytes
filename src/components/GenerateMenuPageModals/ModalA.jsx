@@ -11,23 +11,23 @@ export default function ModalA({onClose}) {
   return (
     <>
       <Dialog
-        sx={{ color: "rgb(0,82,204)" }}
-        open="true"
+        sx={{ color: "white" }}
+        open
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogContent sx={{ backgroundColor: "rgb(0,82,204)" }}>
+        <DialogContent sx={{ backgroundColor: "white"}}>
           <DialogContentText
             id="alert-dialog-description"
-            sx={{ color: "white", fontWeight: "bold" }}
+            sx={{ color: "black" }}
           >
             Menu generated
           </DialogContentText>
         </DialogContent>
-        <DialogActions sx={{ backgroundColor: "rgb(0,82,204)" }}>
+        <DialogActions sx={{ backgroundColor: "white" }}>
 
           <Button
-            sx={{ color: "white" }}
+            sx={{color: "black"}}
             onClick={onClose}
             autoFocus
           >
