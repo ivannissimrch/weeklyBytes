@@ -127,7 +127,10 @@ export default function Allergies() {
               Export Menu 
               <FileUploadIcon fontSize="small" className="cursor-pointer" />
             </button>
-          </div>
+            <button type="button" className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]">
+              <FileUploadIcon fontSize="medium" className="cursor-pointer" />
+            </button>
+        </div>
       </div>
       <section className="flex flex-col w-full items-center">
         <ul className="flex flex-col w-4/5 items-center gap-4 text-lg">
