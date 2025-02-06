@@ -13,7 +13,9 @@ import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NavLink } from "react-router-dom";
+import generatePDF from "../functions/generatePDF";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -120,6 +122,12 @@ export default function Allergies() {
           <span className="">Return to Home</span>
         </NavLink>
         <h2 className="text-center text-2xl ">Allergies</h2>
+        <div className="justify-self-end">
+            <button type="button" className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer">
+              Export Menu 
+              <FileUploadIcon fontSize="small" className="cursor-pointer" />
+            </button>
+          </div>
       </div>
       <section className="flex flex-col w-full items-center">
         <ul className="flex flex-col w-4/5 items-center gap-4 text-lg">
