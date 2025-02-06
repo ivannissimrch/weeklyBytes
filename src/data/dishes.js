@@ -1,5 +1,5 @@
 export default async function dishesDataLoader() {
-    const URL = "https://menus-api.vercel.app/dishs";
+    const URL = "https://menus-api.vercel.app/dishes";
     const controller = new AbortController();
 
     const fetchTimeOut = setTimeout(() => {
