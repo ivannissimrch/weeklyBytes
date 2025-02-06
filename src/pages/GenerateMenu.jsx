@@ -5,8 +5,10 @@ import ModalB from "../components/GenerateMenuPageModals/ModalB.jsx";
 import ModalC from "../components/GenerateMenuPageModals/ModalC.jsx";
 import ModalD from "../components/GenerateMenuPageModals/ModalD.jsx";
 import ModalE from "../components/GenerateMenuPageModals/ModalE.jsx";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ModalF from "../components/GenerateMenuPageModals/ModalF.jsx";
 
 export default function GenerateMenu() {
   const {
@@ -18,6 +20,19 @@ export default function GenerateMenu() {
     setModalType,
   } = useGenerateMenu();
 
+  const [arrayOfTrues, SetArrayOfTrues] = useState([]);
+  const [trueSwitch, setTrueSwitch] = useState(false);
+
+  const handleTrueArrayChange = (array) => {
+    SetArrayOfTrues(array);
+  };
+
+  useEffect(() => {
+    if (arrayOfTrues.length === 7) {
+      setModalType("F");
+    }
+  }, [arrayOfTrues]);
+
   return (
     <div className="w-full flex flex-col items-center bg-custom-yellow">
       <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-full">
@@ -25,7 +40,7 @@ export default function GenerateMenu() {
           className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
           to={"/"}
         >
-          <ArrowBackIcon fontSize="medium" className=""/>
+          <ArrowBackIcon fontSize="medium" className="" />
           <span className="">Return to Home</span>
         </NavLink>
         <h2 className="text-center text-2xl ">Generate Menu</h2>
@@ -39,6 +54,7 @@ export default function GenerateMenu() {
           <Calendar
             onSelectedDaysChange={handleSelectedDaysUpdate}
             onOffDaysChange={handleOffDaysUpdate}
+            onTrueArrayChange={handleTrueArrayChange}
           />
         </div>
         <div className="flex flex-row justify-center w-full">
@@ -58,6 +74,7 @@ export default function GenerateMenu() {
       </div>
       {modalType === "A" && <ModalA onClose={() => setModalType(null)} />}
       {modalType === "B" && <ModalB onClose={() => setModalType(null)} />}
+      {modalType === "F" && <ModalF onClose={() => setModalType(null)} />}
       {modalType === "C" && (
         <ModalC
           onAgree={handleRegenerate}

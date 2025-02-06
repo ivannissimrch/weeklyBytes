@@ -11,15 +11,15 @@ export default function ModalA({onClose}) {
   return (
     <>
       <Dialog
-        sx={{ color: "red" }}
-        open="true"
+        sx={{ color: "white" }}
+        open
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogContent sx={{ backgroundColor: "red" }}>
+        <DialogContent sx={{ backgroundColor: "red"}}>
           <DialogContentText
             id="alert-dialog-description"
-            sx={{ color: "white", fontWeight: "bold" }}
+            sx={{ color: "white" }}
           >
             Menu not yet generated for selected week
           </DialogContentText>
