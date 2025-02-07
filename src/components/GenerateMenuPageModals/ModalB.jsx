@@ -11,15 +11,15 @@ export default function ModalB({onClose}) {
   return (
     <>
       <Dialog
-        sx={{ color: "red" }}
-        open="true"
+        sx={{ color: "white" }}
+        open
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogContent sx={{ backgroundColor: "red" }}>
           <DialogContentText
             id="alert-dialog-description"
-            sx={{ color: "white", fontWeight: "bold" }}
+            sx={{ color: "white"}}
           >
             Menu already exists for this week
           </DialogContentText>
@@ -27,7 +27,7 @@ export default function ModalB({onClose}) {
         <DialogActions sx={{ backgroundColor: "red" }}>
 
           <Button
-            sx={{ color: "white" }}
+            sx={{ color: "white"}}
             onClick={onClose}
             autoFocus
           >

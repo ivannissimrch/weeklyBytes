@@ -59,16 +59,16 @@ export function WeeklyMenu({ weekStartDay }) {
     }, [initialReady]);
 
     return (
-        <div className="flex flex-col items-center py-2 md:py-10 w-full lg:w-[80%]">
-            <div className="flex flex-col items-center gap-4 py-2 md:py-10 w-full md:w-11/12">
-                <h2 className="text-center text-lg md:text-2xl">
+        <div className="flex flex-col items-around mt-1 mb-5 py-4 px-2 w-full bg-custom-blue">
+
+                <h2 className="text-center text-md md:text-2xl pb-5 underline">
                     {getWeekDays(weekStartDay).includes(formatISO9075(new Date(), { representation: "date" }))
                         ? "This"
                         : "Upcoming"}{" "}
                     Week&apos;s Menu
                 </h2>
 
-                <div className="flex flex-col md:grid md:grid-cols-4 w-full gap-5">
+                <div className="flex flex-col md:grid md:grid-cols-4 w-full gap-3">
                     {Array.from(daysObjectsFromStorage.length > 0 ? daysObjectsFromStorage : currentWeekDaysLabels).map(
                         (object, i) => (
                             <DayCard
@@ -80,7 +80,7 @@ export function WeeklyMenu({ weekStartDay }) {
                         )
                     )}
                 </div>
-            </div>
+
         </div>
     );
 }
