@@ -13,7 +13,10 @@ import { customStyles } from "../data/customStyles";
 import DeleteAllModal from "../components/DeleteAllModal";
 import DeleteItemModal from "../components/DeleteItemModal";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NavLink } from "react-router-dom";
+import generateAllergiesPDF from "../functions/generateAllergiesPDF";
+import { ToastContainer } from "react-toastify";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -111,6 +114,7 @@ export default function Allergies() {
 
   return (
     <section className="flex flex-col items-center w-[95%] md:w-[95%] lg:w-[60%]">
+      <ToastContainer />
       <div className="grid grid-col grid-cols-3 py-2 items-center justify-between w-full">
         <NavLink
           className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
@@ -120,7 +124,25 @@ export default function Allergies() {
           <span className="hidden md:block md:text-md">Return to Home</span>
           <span className="md:hidden text-xs">Home</span>
         </NavLink>
+
         <h2 className="text-center text-lg md:text-2xl ">Allergies</h2>
+        <div className="justify-self-end">
+          <button
+            onClick={generateAllergiesPDF}
+            type="button"
+            className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer"
+          >
+            Export Allergies
+            <FileUploadIcon fontSize="small" className="cursor-pointer" />
+          </button>
+          <button
+            onClick={generateAllergiesPDF}
+            type="button"
+            className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]"
+          >
+            <FileUploadIcon fontSize="medium" className="cursor-pointer" />
+          </button>
+        </div>
       </div>
       <section className="flex flex-col w-full items-center bg-custom-blue py-4 md:py-6">
         <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">
@@ -192,7 +214,6 @@ export default function Allergies() {
                         ),
                     }}
                   />
-
                 </span>
                 <button
                   className="w-[15%] md:w-[10%] flex flex-row justify-center items-center text-black hover:text-[red]"
