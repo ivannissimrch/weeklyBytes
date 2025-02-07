@@ -1,7 +1,7 @@
 export const customStyles = {
   control: (provided) => ({
     ...provided,
-    backgroundColor: "rgba(221, 238, 248, 1)",
+    backgroundColor: "rgb(255, 255, 255)",
     textAlign: "center",
     overflow: "hidden",
   }),
@@ -15,7 +15,7 @@ export const customStyles = {
     ...provided,
     backgroundColor: state.isFocused
       ? "rgba(197, 233, 255, 1)"
-      : "rgba(221, 238, 248, 1)",
+      : "rgb(255, 255, 255)",
     textAlign: "center",
     width: "100%",
   }),
@@ -33,10 +33,13 @@ export const customStyles = {
   indicatorSeparator: (provided, state) => ({}),
   clearIndicator: (provided, state) => ({}),
   dropdownIndicator: (provided, state) => {
+    const isMobile = window.innerWidth <= 640;
+    
     return {
       ...provided,
       color: "black",
       opacity: state.isFocused ? "0" : "100",
+      display: isMobile ? "none" : "block",
     };
   },
 };

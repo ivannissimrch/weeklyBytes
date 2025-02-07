@@ -16,7 +16,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NavLink } from "react-router-dom";
 import generateAllergiesPDF from "../functions/generateAllergiesPDF";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 export default function Allergies() {
   const fetchDishes = useLoaderData();
@@ -113,47 +113,57 @@ export default function Allergies() {
   }
 
   return (
-    <section className="flex flex-col items-center w-full">
+    <section className="flex flex-col items-center w-[95%] md:w-[95%] lg:w-[60%]">
       <ToastContainer />
-      <div className="grid grid-col grid-cols-3 py-5 items-center justify-between w-full">
+      <div className="grid grid-col grid-cols-3 py-2 items-center justify-between w-full">
         <NavLink
           className="w-fit hover:text-button-blue flex flex-row items-center justify-start"
           to={"/"}
         >
           <ArrowBackIcon fontSize="medium" className="" />
-          <span className="">Return to Home</span>
+          <span className="hidden md:block md:text-md">Return to Home</span>
+          <span className="md:hidden text-xs">Home</span>
         </NavLink>
-        <h2 className="text-center text-2xl ">Allergies</h2>
+
+        <h2 className="text-center text-lg md:text-2xl ">Allergies</h2>
         <div className="justify-self-end">
-            <button onClick={generateAllergiesPDF} type="button" className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer">
-              Export Allergies
-              <FileUploadIcon fontSize="small" className="cursor-pointer" />
-            </button>
-            <button onClick={generateAllergiesPDF} type="button" className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]">
-              <FileUploadIcon fontSize="medium" className="cursor-pointer" />
-            </button>
+          <button
+            onClick={generateAllergiesPDF}
+            type="button"
+            className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer"
+          >
+            Export Allergies
+            <FileUploadIcon fontSize="small" className="cursor-pointer" />
+          </button>
+          <button
+            onClick={generateAllergiesPDF}
+            type="button"
+            className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]"
+          >
+            <FileUploadIcon fontSize="medium" className="cursor-pointer" />
+          </button>
         </div>
       </div>
-      <section className="flex flex-col w-full items-center">
-        <ul className="flex flex-col w-4/5 items-center gap-4 text-lg">
-          <li className="flex w-full items-center  gap-4">
-            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
+      <section className="flex flex-col w-full items-center bg-custom-blue py-4 md:py-6">
+        <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">
+          <li className="flex w-full items-center  gap-1 md:gap-4">
+            <span className="w-1/2 py-2 bg-white flex justify-center items-center shadow-md">
               Employee Name
             </span>
-            <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
+            <span className="w-1/2 py-2 bg-white flex justify-center items-center shadow-md">
               Allergy
             </span>
           </li>
           {employeesData.map((employee) => (
             <li
-              className="flex w-full justify-start items-center  gap-4"
+              className="flex w-full justify-start items-center  gap-1 md:gap-4"
               key={employee.id}
             >
-              <span className="w-1/2 py-2 bg-custom-blue flex justify-center items-center shadow-md">
+              <span className="w-1/2 py-2 bg-white flex justify-center items-center shadow-md">
                 {employee.name}
               </span>
               <div className="w-1/2 flex justify-between items-center">
-                <span className="w-11/12 bg-custom-blue relative shadow-md">
+                <span className="w-[85%] md:w-[90%] bg-white relative shadow-md">
                   <Select
                     onBlur={() => {
                       setOpenDropDown(false);
@@ -204,10 +214,9 @@ export default function Allergies() {
                         ),
                     }}
                   />
-
                 </span>
                 <button
-                  className="w-1/12 flex flex-row justify-center items-center text-black hover:text-[red]"
+                  className="w-[15%] md:w-[10%] flex flex-row justify-center items-center text-black hover:text-[red]"
                   onClick={(event) => {
                     setDeletingEmployee(employee.name);
                     if (employee.allergies.length > 0) {
@@ -216,7 +225,7 @@ export default function Allergies() {
                   }}
                   title="Delete all allergies"
                 >
-                  <DeleteIcon fontSize="large" />
+                  <DeleteIcon fontSize="medium" />
                 </button>
               </div>
             </li>
