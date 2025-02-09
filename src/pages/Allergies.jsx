@@ -165,6 +165,7 @@ export default function Allergies() {
               <div className="w-1/2 flex justify-between items-center">
                 <span className="w-[85%] md:w-[90%] bg-white relative shadow-md">
                   <Select
+                    aria-label = {`Allergies for ${employee.name}`}
                     onBlur={() => {
                       setOpenDropDown(false);
                     }}
