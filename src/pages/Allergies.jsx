@@ -156,15 +156,15 @@ export default function Allergies() {
             </span>
           </li>
           {employeesData.map((employee) => (
-            <div className="w-full flex flex-row" key={employee.id}>
             <li
-              className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white shadow-md odd:bg-custom-blue even:bg-highlight-blue"
+              className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white bg-transparent"
               key={employee.id}
             >
+            <div className="w-full flex flex-row odd:bg-custom-blue even:bg-highlight-blue shadow-md">
               <span className="w-1/2 p-2 flex justify-start items-center ">
                 {employee.name}
               </span>
-              <div className="w-1/2 flex justify-end items-end">
+              <div className="w-1/2 flex justify-end items-center">
                 <span className="w-[85%] md:w-[90%]  relative ">
                   <Select
                     aria-label = {`Allergies for ${employee.name}`}
@@ -219,7 +219,7 @@ export default function Allergies() {
                   />
                 </span>
               </div>
-            </li>
+              </div>
             <button
               className="w-[15%] md:w-[5%] flex flex-row justify-center items-center text-black hover:text-[red]"
               onClick={(event) => {
@@ -232,7 +232,7 @@ export default function Allergies() {
             >
               <RefreshIcon fontSize="medium" />
             </button>
-            </div>
+            </li>
           ))}
         </ul>
       </section>
