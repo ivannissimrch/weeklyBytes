@@ -155,12 +155,12 @@ export default function Allergies() {
               Allergy
             </span>
           </li>
-          {employeesData.map((employee) => (
+          {employeesData.map((employee, index) => (
             <li
               className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white bg-transparent"
               key={employee.id}
             >
-            <div className="w-full flex flex-row odd:bg-custom-blue even:bg-highlight-blue shadow-md">
+            <div className={`w-full flex flex-row shadow-md ${index % 2 === 0 ? "bg-custom-blue" : "bg-highlight-blue"}`}>
               <span className="w-1/2 p-2 flex justify-start items-center ">
                 {employee.name}
               </span>
