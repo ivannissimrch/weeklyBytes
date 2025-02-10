@@ -165,7 +165,7 @@ export default function Allergies() {
                 {employee.name}
               </span>
               <div className="w-1/2 flex justify-end items-center">
-                <span className="w-[85%] md:w-[90%]  relative ">
+                <span className="w-full md:w-[90%]  relative ">
                   <Select
                     aria-label = {`Allergies for ${employee.name}`}
                     onBlur={() => {
@@ -221,7 +221,7 @@ export default function Allergies() {
               </div>
               </div>
             <button
-              className="w-[15%] md:w-[5%] flex flex-row justify-center items-center text-black hover:text-[red]"
+              className="w-[10%] md:w-[5%] flex flex-row justify-end items-center text-black hover:text-[red]"
               onClick={(event) => {
                 setDeletingEmployee(employee.name);
                 if (employee.allergies.length > 0) {
