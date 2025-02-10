@@ -3,6 +3,7 @@ import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
@@ -144,7 +145,7 @@ export default function Allergies() {
           </button>
         </div>
       </div>
-      <section className="flex flex-col w-full items-center bg-custom-blue py-4 md:py-6">
+      <section className="flex flex-col w-full items-center py-4 md:py-6">
         <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">
           <li className="flex w-full items-center  gap-1 md:gap-4">
             <span className="w-1/2 py-2 flex justify-center items-start shadow-none font-bold">
@@ -156,14 +157,14 @@ export default function Allergies() {
           </li>
           {employeesData.map((employee) => (
             <li
-              className="flex w-full justify-start items-center  gap-1 md:gap-4"
+              className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white shadow-md odd:bg-custom-blue even:bg-highlight-blue"
               key={employee.id}
             >
-              <span className="w-1/2 p-2 bg-white flex justify-start items-center shadow-md">
+              <span className="w-1/2 p-2 flex justify-start items-center ">
                 {employee.name}
               </span>
               <div className="w-1/2 flex justify-between items-center">
-                <span className="w-[85%] md:w-[90%] bg-white relative shadow-md">
+                <span className="w-[85%] md:w-[90%]  relative ">
                   <Select
                     aria-label = {`Allergies for ${employee.name}`}
                     onBlur={() => {
@@ -226,7 +227,7 @@ export default function Allergies() {
                   }}
                   title="Delete all allergies"
                 >
-                  <DeleteIcon fontSize="medium" />
+                  <RefreshIcon fontSize="medium" />
                 </button>
               </div>
             </li>
