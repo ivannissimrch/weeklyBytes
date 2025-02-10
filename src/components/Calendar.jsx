@@ -56,10 +56,10 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
                 })
               : false,
         }}
-        disabled={[
+        /*disabled={[
           { dayOfWeek: offDaysDisabled },
           { before: startOfWeek(new Date(), { weekStartsOn: 1 }) },
-        ]}
+        ]}*/
         onDayClick={handleDayClick}
       />
       {selectedDays && (
