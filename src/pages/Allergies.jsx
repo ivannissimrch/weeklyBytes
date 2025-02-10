@@ -190,7 +190,7 @@ export default function Allergies() {
                     isMulti
                     options={ALLERGENS}
                     value={employee.allergies}
-                    placeholder={"[Allergy]"}
+                    placeholder={"[Select Allergy]"}
                     isClearable={false}
                     onMenuOpen={() => {
                       setActiveEditingEmployeeName(employee.name);
