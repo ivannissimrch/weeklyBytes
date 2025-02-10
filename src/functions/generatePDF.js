@@ -13,13 +13,12 @@ function getWeekDays(weekStart) {
     return days;
   }
 
-export default function downloadMenuPDF() {
+export default function downloadMenuPDF(weekStart) {
 
-        const currentWeekDays = getWeekDays(
-          startOfWeek(new Date(), { weekStartsOn: 1 })
+        const currentWeekDays = getWeekDays(weekStart
         );
         const nextWeekDays = getWeekDays(
-          startOfWeek(addDays(new Date(), 7), {
+          startOfWeek(addDays(weekStart, 7), {
             weekStartsOn: 1,
           })
         );
@@ -44,12 +43,12 @@ export default function downloadMenuPDF() {
     
             const dayLabels = [];
     
-            if (title === "Current Week") {
+            if (title === "Selected Week") {
               for (let i = 0; i < 7; i += 1) {
                 //changes DATE data into a STRING and removes time data (ex: "Mon Jan 20 2025")
                 dayLabels.push(
                   format(
-                    addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), i),
+                    addDays(weekStart, i),
                     "EEE MMM-dd-yyyy"
                   )
                 );
@@ -60,7 +59,7 @@ export default function downloadMenuPDF() {
                 dayLabels.push(
                   format(
                     addDays(
-                      startOfWeek(addDays(new Date(), 7), {
+                      startOfWeek(addDays(weekStart, 7), {
                         weekStartsOn: 1,
                       }),
                       i
@@ -125,7 +124,7 @@ export default function downloadMenuPDF() {
             }
           };
     
-          formatMenuData(currentWeekDays, menuDishes, "Current Week", 40);
+          formatMenuData(currentWeekDays, menuDishes, "Selected Week", 40);
           // TODO: The upcoming week does not render correctly:
           formatMenuData(nextWeekDays, menuDishes, "Upcoming Week", 130);
           doc.save("WeeklyMenu.pdf");
