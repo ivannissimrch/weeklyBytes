@@ -156,6 +156,7 @@ export default function Allergies() {
             </span>
           </li>
           {employeesData.map((employee) => (
+            <div className="w-full flex flex-row" key={employee.id}>
             <li
               className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white shadow-md odd:bg-custom-blue even:bg-highlight-blue"
               key={employee.id}
@@ -163,7 +164,7 @@ export default function Allergies() {
               <span className="w-1/2 p-2 flex justify-start items-center ">
                 {employee.name}
               </span>
-              <div className="w-1/2 flex justify-between items-center">
+              <div className="w-1/2 flex justify-end items-end">
                 <span className="w-[85%] md:w-[90%]  relative ">
                   <Select
                     aria-label = {`Allergies for ${employee.name}`}
@@ -217,20 +218,21 @@ export default function Allergies() {
                     }}
                   />
                 </span>
-                <button
-                  className="w-[15%] md:w-[10%] flex flex-row justify-center items-center text-black hover:text-[red]"
-                  onClick={(event) => {
-                    setDeletingEmployee(employee.name);
-                    if (employee.allergies.length > 0) {
-                      setShowDeleteAllModal(true);
-                    }
-                  }}
-                  title="Delete all allergies"
-                >
-                  <RefreshIcon fontSize="medium" />
-                </button>
               </div>
             </li>
+            <button
+              className="w-[15%] md:w-[5%] flex flex-row justify-center items-center text-black hover:text-[red]"
+              onClick={(event) => {
+                setDeletingEmployee(employee.name);
+                if (employee.allergies.length > 0) {
+                  setShowDeleteAllModal(true);
+                }
+              }}
+              title="Delete all allergies"
+            >
+              <RefreshIcon fontSize="medium" />
+            </button>
+            </div>
           ))}
         </ul>
       </section>
