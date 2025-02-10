@@ -146,7 +146,7 @@ export default function Allergies() {
         </div>
       </div>
       <section className="flex flex-col w-full items-center py-4 md:py-6">
-        <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">
+        <ul className="flex flex-col w-[95%] md:w-full items-center gap-2 md:gap-4 text-sm md:text-lg">
           <li className="flex w-full items-center  gap-1 md:gap-4">
             <span className="w-1/2 py-2 flex justify-center items-start shadow-none font-bold">
               Employee Name
