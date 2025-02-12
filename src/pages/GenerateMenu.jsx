@@ -61,13 +61,13 @@ export default function GenerateMenu() {
         <div className="flex flex-row justify-center w-full">
           <button
             onClick={handleGenerate}
-            className="bg-button-yellow border-2 text-white rounded-3xl p-2 m-3  w-3/12 text-center text-sm md:text-md hover:bg-white hover:text-button-yellow hover:border-2 hover:border-button-yellow"
+            className="bg-[#364688] border-2 text-white rounded-3xl p-2 m-3  w-3/12 text-center text-sm md:text-md hover:bg-white hover:text-[#364688] hover:border-2 hover:border-[#364688]"
           >
             Generate
           </button>
           <button
             onClick={() => setModalType("C")}
-            className="bg-button-yellow border-2 text-white rounded-3xl p-2 m-3 w-3/12 text-center text-sm md:text-md hover:bg-white hover:text-button-yellow hover:border-2 hover:border-button-yellow"
+            className="bg-white border-[#364688] border-2 text-[#364688] rounded-3xl p-2 m-3 w-3/12 text-center text-sm md:text-md hover:bg-[#364688] hover:text-white hover:border-2 hover:border-white"
           >
             Regenerate
           </button>
