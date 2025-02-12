@@ -69,7 +69,7 @@ export function WeeklyMenu({ weekStartDay }) {
 
 
   return (
-    <div className="flex flex-col items-around mt-1 mb-5 py-4 px-2 w-full bg-custom-blue">
+    <div className="flex flex-col items-around mt-1 mb-5 py-4 px-2 w-full bg-custom-yellow">
       <h2 className="text-center text-md md:text-2xl pb-5 underline">
         {isEqual(weekStartDay, startOfWeek(new Date(), { weekStartsOn: 1 }))
           ? "This Week's Menu"

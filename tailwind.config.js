@@ -11,10 +11,10 @@ export default {
           },
         extend: {
             colors: {
-                "custom-yellow": "rgba(255, 254, 241, 1)",
-                "custom-blue": "rgba(221, 238, 248, 1)",
-                "button-blue":"rgba(0, 82, 204, 1)",
-                "highlight-blue":"rgba(197, 233, 255, 1)"
+                "custom-yellow-root": "rgba(255, 254, 241, 1)",
+                "custom-yellow": "rgba(248, 245, 221, .9)",
+                "button-yellow":"rgba(255, 204, 0, 1)",
+                "highlight-yellow":"rgb(255, 230, 131)"
             }
         },
 

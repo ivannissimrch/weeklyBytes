@@ -2,7 +2,7 @@ import { WeeklyMenu } from "../components/weekly-menu/WeeklyMenu";
 import { NavLink, useLoaderData } from "react-router-dom";
 import { addDays, startOfWeek, parseISO, isBefore, formatISO, addMonths } from "date-fns";
 import { ToastContainer, toast } from "react-toastify";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+import DownloadIcon from '@mui/icons-material/Download';
 import AddIcon from "@mui/icons-material/Add";
 import generatePDF from "../functions/generatePDF";
 import { useEffect, useState } from "react";
@@ -94,7 +94,7 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col items-center w-[95%] md:w-[95%] lg:w-[80%] ">
+    <div className="flex flex-col items-center w-[95%] md:w-[95%] lg:w-[80%] py-2">
       {!fetchDishes.error ? (
         <>
           <div className="w-full lg:w-[85%] flex flex-col-reverse md:flex-row md:justify-between  md:items-end">
@@ -113,9 +113,11 @@ export default function Home() {
                   ...provided,
                    backgroundColor:
                    state.isFocused
-                    ? "rgba(197, 233, 255, 1)"
-                    : "rgb(221, 238, 248)",
-                    color:"black",
+                    ? "rgb(54, 70, 136)"
+                    : "rgba(255, 254, 241, 1)",
+                    color:state.isFocused
+                    ? "white"
+                    : "black",
                   textAlign: "left",
                   width: "100%",
                 })}}
@@ -124,23 +126,23 @@ export default function Home() {
             <div className="flex flex-row justify-end md:flex-col md:items-end md:justify-center w-full lg:w-[85%]">
               <div
                 onClick={() => generatePDF(displayedStartOfWeek)}
-                className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-button-blue px-1"
+                className="md:hidden flex flex-row text-black justify-center items-center w-fit text-white  px-1"
               >
-                <FileUploadIcon fontSize="medium" className="cursor-pointer" />
+                 <DownloadIcon fontSize="medium" className="cursor-pointer" />
               </div>
               <NavLink
-                className="flex flex-row justify-center items-center bg-button-blue border-2 text-white rounded-3xl h-[36px] w-fit px-[18px] md:px-[60px] my-2 hover:bg-white hover:text-button-blue hover:border-2 hover:border-button-blue"
+                className="flex flex-row justify-center items-center bg-button-yellow border-2 text-white rounded-3xl h-[36px] w-fit px-[18px] md:px-[60px] my-2 hover:bg-white hover:text-button-yellow hover:border-2 hover:border-button-yellow"
                 to={"/GenerateMenu"}
               >
                 <AddIcon fontSize="small" className="" />
-                <span className="text-sm md:text-lg">Generate Menu</span>
+                <span className="text-sm md:text-lg">&nbsp;Generate Menu</span>
               </NavLink>
               <div
                 onClick={() => generatePDF(displayedStartOfWeek)}
-                className="hidden md:flex md:flex-row md:bg-gray-500 md:border-2 md:text-white md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer"
+                className="hidden md:flex md:flex-row md:bg-white md:border-2 md:border-button-yellow md:text-button-yellow md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-white md:hover:bg-button-yellow md:hover:text-white md:cursor-pointer"
               >
-                <span>Export Menu</span>
-                <FileUploadIcon fontSize="small" className="cursor-pointer" />
+                 <DownloadIcon fontSize="small" className="cursor-pointer" />
+                 <span>&nbsp;Export Menu</span>
               </div>
             </div>
           </div>
