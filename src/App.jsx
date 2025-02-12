@@ -7,6 +7,7 @@ import Allergies from "./pages/Allergies.jsx";
 import dataDishesLoader from "./data/dishes.js";
 import GenerateMenu from "./pages/GenerateMenu.jsx";
 import Login from "./pages/Login.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 
 export const AppContext = createContext([]);
 
@@ -35,6 +36,10 @@ function App() {
                 {
                     path: "Login",
                     element: <Login />,
+                },
+                {
+                    path: "ResetPassword",
+                    element: <ResetPassword />,
                 },
             ],
         },

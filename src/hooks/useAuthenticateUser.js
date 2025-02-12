@@ -5,14 +5,21 @@ import {
     setPersistence,
     signInWithEmailAndPassword,
     signOut,
+    sendPasswordResetEmail,
 } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { app } from "../data/firebase";
 import { toast } from "react-toastify";
 
-export default function useAuthenticateUser(email, password) {
+export default function useAuthenticateUser() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [signedIn, setSignedIn] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [passwordResetSuccess, setPasswordResetSuccess] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,6 +37,7 @@ export default function useAuthenticateUser(email, password) {
 
     function handleSignIn(e) {
         e.preventDefault();
+        setError(false);
         const auth = getAuth(app);
         setPersistence(auth, browserLocalPersistence).then(() => {
             signInWithEmailAndPassword(auth, email, password)
@@ -46,9 +54,8 @@ export default function useAuthenticateUser(email, password) {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.error(errorCode, " - ", errorMessage);
-                    toast.error("Invalid email or password", {
-                        theme: "colored",
-                    });
+                    setError(true);
+                    setErrorMessage("Invalid username or password");
                 });
         });
     }
@@ -70,5 +77,33 @@ export default function useAuthenticateUser(email, password) {
         return isOpen;
     }
 
-    return { signedIn, handleSignIn, handleUserAuthentication, toast };
+    function handleResetPassword(e, email) {
+        e.preventDefault();
+        const auth = getAuth(app);
+
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                toast.success("Check your email for a link to reset your password!");
+                setPasswordResetSuccess(true);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error(errorCode, " - ", errorMessage);
+            });
+    }
+
+    return {
+        signedIn,
+        handleSignIn,
+        handleUserAuthentication,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        error,
+        errorMessage,
+        handleResetPassword,
+        passwordResetSuccess,
+    };
 }
