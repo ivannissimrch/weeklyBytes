@@ -131,7 +131,7 @@ export default function Home() {
                  <DownloadIcon fontSize="medium" className="cursor-pointer" />
               </div>
               <NavLink
-                className="flex flex-row justify-center items-center bg-button-yellow border-2 text-white rounded-3xl h-[36px] w-fit px-[18px] md:px-[60px] my-2 hover:bg-white hover:text-button-yellow hover:border-2 hover:border-button-yellow"
+                className="flex flex-row justify-center items-center bg-[#364688] border-2 text-white rounded-3xl h-[36px] w-fit px-[18px] md:px-[60px] my-2 hover:bg-white hover:text-[#364688] hover:border-2 hover:border-[#364688]"
                 to={"/GenerateMenu"}
               >
                 <AddIcon fontSize="small" className="" />
@@ -139,7 +139,7 @@ export default function Home() {
               </NavLink>
               <div
                 onClick={() => generatePDF(displayedStartOfWeek)}
-                className="hidden md:flex md:flex-row md:bg-white md:border-2 md:border-button-yellow md:text-button-yellow md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-white md:hover:bg-button-yellow md:hover:text-white md:cursor-pointer"
+                className="hidden md:flex md:flex-row md:bg-white md:border-2 md:border-[#364688] md:text-[#364688] md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-white md:hover:bg-[#364688] md:hover:text-white md:cursor-pointer"
               >
                  <DownloadIcon fontSize="small" className="cursor-pointer" />
                  <span>&nbsp;Export Menu</span>
