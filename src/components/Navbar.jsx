@@ -77,15 +77,15 @@ export default function Navbar() {
             </div>
             {!signedIn ? (
                 <button
-                    className="hidden lg:block md:block sm border-indigo-900 text-indigo-900 hover:bg-indigo-900 hover:text-white font-bold py-3 px-8 rounded-full border-2 max-w-[50%] justify-self-end"
+                    className="hidden lg:block md:block sm border-indigo-900 text-indigo-900 hover:bg-indigo-900 hover:text-white font-bold py-3 px-8 md:px-4 rounded-full border-2 max-w-[50%] justify-self-end"
                     onClick={() => handleUserAuthentication()}>
                     Sign In
                 </button>
             ) : (
                 <div className="hidden lg:flex md:flex sm flex flex-row justify-self-end items-center">
                     <p>
-                        Hello, <span className="font-bold pr-4">Tom!</span>{" "}
                         {/* This would dynamically render user's name */}
+                        Hello, <span className="font-bold pr-4">Tom!</span>
                     </p>
                     <button
                         className="hidden lg:block md:block sm border-indigo-900 text-indigo-900 hover:bg-indigo-900 hover:text-white font-bold py-3 px-8 rounded-full border-2"
