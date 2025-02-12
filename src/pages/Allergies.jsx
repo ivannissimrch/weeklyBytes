@@ -133,7 +133,7 @@ export default function Allergies() {
           <button
             onClick={generateAllergiesPDF}
             type="button"
-            className="hidden md:flex md:flex-row md:bg-white md:border-2 md:border-button-yellow md:text-button-yellow md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-white md:hover:bg-button-yellow md:hover:text-white md:cursor-pointer"
+            className="hidden md:flex md:flex-row md:bg-white md:border-2 md:border-[#364688] md:text-[#364688] md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-white md:hover:bg-[#364688] md:hover:text-white md:cursor-pointer"
           >
             <DownloadIcon fontSize="small" className="cursor-pointer" />
             <span>&nbsp;Export Allergies</span>
