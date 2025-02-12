@@ -161,7 +161,7 @@ export default function Home() {
           </div>
         </>
       ) : (
-        <div className="text-center italic ">{fetchDishes.error}</div>
+        <div className="text-center italic bg-custom-yellow">{fetchDishes.error}</div>
       )}
     </div>
   );
