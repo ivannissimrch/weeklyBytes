@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -7,7 +8,6 @@ import useAuthenticateUser from "../hooks/useAuthenticateUser";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-
     const { signedIn, handleUserAuthentication } = useAuthenticateUser();
 
     return (
@@ -80,6 +80,7 @@ export default function Navbar() {
                 onClick={() => handleUserAuthentication()}>
                 {!signedIn ? "Manager Login" : "Sign Out"}
             </button>
+            <ToastContainer autoClose={2000} hideProgressBar={true} closeOnClick={true} pauseOnHover />
         </div>
     );
 }

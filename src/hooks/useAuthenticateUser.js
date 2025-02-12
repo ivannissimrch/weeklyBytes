@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { app } from "../data/firebase";
-import { is } from "date-fns/locale/is";
+import { toast } from "react-toastify";
 
 export default function useAuthenticateUser(email, password) {
     const [signedIn, setSignedIn] = useState(false);
@@ -21,7 +21,6 @@ export default function useAuthenticateUser(email, password) {
             if (user) {
                 const uid = user.uid;
                 console.log(uid);
-                // navigate("/");
                 setSignedIn(true);
             } else {
                 setSignedIn(false);
@@ -33,14 +32,34 @@ export default function useAuthenticateUser(email, password) {
         e.preventDefault();
         const auth = getAuth(app);
         setPersistence(auth, browserLocalPersistence).then(() => {
-            return signInWithEmailAndPassword(auth, email, password);
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Successful sign-in
+                    const user = userCredential.user;
+                    console.log(user);
+                    toast.success("Successfully signed in!", {
+                        theme: "colored",
+                    });
+                    navigate("/");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error(errorCode, " - ", errorMessage);
+                    toast.error("Invalid email or password", {
+                        theme: "colored",
+                    });
+                });
         });
     }
 
     function handleUserAuthentication(isOpen, setIsOpen) {
         if (signedIn) {
-            const auth = getAuth();
+            const auth = getAuth(app);
             signOut(auth).then(() => {
+                toast.success("Successfully signed out!", {
+                    theme: "colored",
+                });
                 setSignedIn(false);
             });
         } else {
@@ -51,5 +70,5 @@ export default function useAuthenticateUser(email, password) {
         return isOpen;
     }
 
-    return { signedIn, handleSignIn, handleUserAuthentication };
+    return { signedIn, handleSignIn, handleUserAuthentication, toast };
 }
