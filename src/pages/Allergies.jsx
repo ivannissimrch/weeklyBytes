@@ -14,7 +14,7 @@ import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined
 import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+import DownloadIcon from "@mui/icons-material/Download";
 
 import identifySafeDishes from "../functions/identifySafeDishes";
 import DeleteAllModal from "../components/DeleteAllModal";
@@ -27,16 +27,12 @@ export default function Allergies() {
     const [employeesData, setEmployeesData] = useLocalStorage("employeesData", INITIAL_EMPLOYEE_DATA);
     const [safeDishes, setSafeDishes] = useLocalStorage("safeDishes", fetchDishes);
 
-    console.log(safeDishes);
-
     const [activeEditingEmployeeName, setActiveEditingEmployeeName] = useState(null);
     const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
     const [deletingEmployee, setDeletingEmployee] = useState(null);
     const [showDeleteItemModal, setShowDeleteItemModal] = useState(false);
     const [optionsSelected, setOptionsSelected] = useState(null);
     const [openDropDown, setOpenDropDown] = useState(false);
-    // const [signedIn, setSignedIn] = useState(false);
-
     const { signedIn } = useAuthenticateUser();
 
     function handleClosingDeleteAllDialog(agree) {
@@ -109,41 +105,43 @@ export default function Allergies() {
     }
 
     return (
-        <section className="flex flex-col items-center w-[95%] md:w-[95%] lg:w-[60%]">
+        <section className="flex flex-col items-center h-screen py-2 w-[95%] md:w-[95%] lg:w-[60%]">
             <ToastContainer />
-            <div className="grid grid-col grid-cols-3 py-2 items-center justify-between w-full">
-                <NavLink className="w-fit hover:text-button-blue flex flex-row items-center justify-start" to={"/"}>
+            <div className="grid grid-col grid-cols-3 py-2 items-center justify-between w-full ">
+                <NavLink
+                    className="w-fit text-white hover:text-button-yellow flex flex-row items-center justify-start"
+                    to={"/"}>
                     <ArrowBackIcon fontSize="medium" className="" />
                     <span className="hidden md:block md:text-md">Return to Home</span>
                     <span className="md:hidden text-xs">Home</span>
                 </NavLink>
 
-                <h2 className="text-center text-lg md:text-2xl ">Allergies</h2>
+                <h2 className="text-center text-lg md:text-3xl text-white">Allergies</h2>
                 {signedIn && (
                     <div className="justify-self-end">
                         <button
                             onClick={generateAllergiesPDF}
                             type="button"
-                            className="hidden md:flex md:bg-gray-500 md:border-2 md:text-white md:justify-end md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-gray-500 md:hover:bg-white md:hover:text-gray-500 md:cursor-pointer">
-                            Export Allergies
-                            <FileUploadIcon fontSize="small" className="cursor-pointer" />
+                            className="hidden md:flex md:flex-row md:bg-white md:border-2 md:border-[#364688] md:text-[#364688] md:justify-center md:items-center md:rounded-full md:h-[36px] md:w-fit md:px-[24px] md:py-[6px] md:hover:border-2 md:hover:border-solid md:hover:border-white md:hover:bg-[#364688] md:hover:text-white md:cursor-pointer">
+                            <DownloadIcon fontSize="small" className="cursor-pointer" />
+                            <span>&nbsp;Export Allergies</span>
                         </button>
                         <button
                             onClick={generateAllergiesPDF}
                             type="button"
-                            className="md:hidden flex flex-row text-button-blue justify-center items-center w-fit border-2 border-button-blue aspect-square rounded-full p-[2px]">
-                            <FileUploadIcon fontSize="medium" className="cursor-pointer" />
+                            className="md:hidden flex flex-row text-white justify-center items-center w-fit rounded-full p-[2px]">
+                            <DownloadIcon fontSize="medium" className="cursor-pointer" />
                         </button>
                     </div>
                 )}
             </div>
-            <section className="flex flex-col w-full items-center py-4 md:py-6">
-                <ul className="flex flex-col w-[95%] md:w-full items-center gap-2 md:gap-4 text-sm md:text-lg">
-                    <li className="flex w-full items-center  gap-1 md:gap-4">
-                        <span className="w-1/2 py-2 flex justify-center items-start shadow-none font-bold">
+            <section className="flex flex-col w-full items-center py-4 md:py-6 bg-custom-yellow">
+                <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">
+                    <li className="flex w-full items-center  ">
+                        <span className="w-[45%]  py-2 flex justify-center items-start shadow-none font-bold underline">
                             Employee Name
                         </span>
-                        <span className="w-1/2 py-2 flex justify-center items-start shadow-none font-bold">
+                        <span className="w-[55%]  py-2 flex justify-center items-start shadow-none font-bold underline">
                             Allergy
                         </span>
                     </li>
@@ -152,12 +150,12 @@ export default function Allergies() {
                             className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white bg-transparent"
                             key={employee.id}>
                             <div
-                                className={`w-full flex flex-row shadow-md ${
-                                    index % 2 === 0 ? "bg-custom-blue" : "bg-highlight-blue"
+                                className={`w-full flex flex-row shadow-md text-xs md:text-lg ${
+                                    index % 2 === 0 ? "bg-white" : "bg-highlight-yellow"
                                 }`}>
-                                <span className="w-1/2 p-2 flex justify-start items-center ">{employee.name}</span>
-                                <div className="w-1/2 flex justify-end items-center">
-                                    <span className="w-full md:w-[90%]  relative ">
+                                <span className="w-[40%] p-2 flex justify-start items-center ">{employee.name}</span>
+                                <div className="w-[50%] md:w-[55%] h-auto  flex justify-end items-center">
+                                    <span className="w-[90%] h-auto relative ">
                                         <Select
                                             aria-label={`Allergies for ${employee.name}`}
                                             onBlur={() => {
@@ -207,18 +205,18 @@ export default function Allergies() {
                                         />
                                     </span>
                                 </div>
+                                <button
+                                    className="w-[10%] md:w-[5%] flex flex-row justify-center items-center text-black hover:text-[red]"
+                                    onClick={(event) => {
+                                        setDeletingEmployee(employee.name);
+                                        if (employee.allergies.length > 0) {
+                                            setShowDeleteAllModal(true);
+                                        }
+                                    }}
+                                    title="Delete all allergies">
+                                    <RefreshIcon fontSize="small" />
+                                </button>
                             </div>
-                            <button
-                                className="w-[10%] md:w-[5%] flex flex-row justify-end items-center text-black hover:text-[red]"
-                                onClick={(event) => {
-                                    setDeletingEmployee(employee.name);
-                                    if (employee.allergies.length > 0) {
-                                        setShowDeleteAllModal(true);
-                                    }
-                                }}
-                                title="Delete all allergies">
-                                <RefreshIcon fontSize="medium" />
-                            </button>
                         </li>
                     ))}
                 </ul>
