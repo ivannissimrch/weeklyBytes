@@ -207,7 +207,7 @@ export default function Allergies() {
                                 </div>
                                 <button
                                     className="w-[10%] md:w-[5%] flex flex-row justify-center items-center text-black hover:text-[red]"
-                                    onClick={(event) => {
+                                    onClick={() => {
                                         setDeletingEmployee(employee.name);
                                         if (employee.allergies.length > 0) {
                                             setShowDeleteAllModal(true);
