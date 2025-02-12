@@ -3,6 +3,7 @@ import { ALLERGENS } from "../data/allergens";
 import { INITIAL_EMPLOYEE_DATA } from "../data/initialEmployeeData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import DeleteIcon from "@mui/icons-material/Delete";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
@@ -144,26 +145,27 @@ export default function Allergies() {
           </button>
         </div>
       </div>
-      <section className="flex flex-col w-full items-center bg-custom-blue py-4 md:py-6">
-        <ul className="flex flex-col w-[95%] md:w-4/5 items-center gap-2 md:gap-4 text-sm md:text-lg">
+      <section className="flex flex-col w-full items-center py-4 md:py-6">
+        <ul className="flex flex-col w-[95%] md:w-full items-center gap-2 md:gap-4 text-sm md:text-lg">
           <li className="flex w-full items-center  gap-1 md:gap-4">
-            <span className="w-1/2 py-2 bg-white flex justify-center items-center shadow-md">
+            <span className="w-1/2 py-2 flex justify-center items-start shadow-none font-bold">
               Employee Name
             </span>
-            <span className="w-1/2 py-2 bg-white flex justify-center items-center shadow-md">
+            <span className="w-1/2 py-2 flex justify-center items-start shadow-none font-bold">
               Allergy
             </span>
           </li>
-          {employeesData.map((employee) => (
+          {employeesData.map((employee, index) => (
             <li
-              className="flex w-full justify-start items-center  gap-1 md:gap-4"
+              className="flex w-full justify-start items-center gap-1 md:gap-4 bg-white bg-transparent"
               key={employee.id}
             >
-              <span className="w-1/2 py-2 bg-white flex justify-center items-center shadow-md">
+            <div className={`w-full flex flex-row shadow-md ${index % 2 === 0 ? "bg-custom-blue" : "bg-highlight-blue"}`}>
+              <span className="w-1/2 p-2 flex justify-start items-center ">
                 {employee.name}
               </span>
-              <div className="w-1/2 flex justify-between items-center">
-                <span className="w-[85%] md:w-[90%] bg-white relative shadow-md">
+              <div className="w-1/2 flex justify-end items-center">
+                <span className="w-full md:w-[90%]  relative ">
                   <Select
                     aria-label = {`Allergies for ${employee.name}`}
                     onBlur={() => {
@@ -188,7 +190,7 @@ export default function Allergies() {
                     isMulti
                     options={ALLERGENS}
                     value={employee.allergies}
-                    placeholder={"[Allergy]"}
+                    placeholder={"[Select Allergy]"}
                     isClearable={false}
                     onMenuOpen={() => {
                       setActiveEditingEmployeeName(employee.name);
@@ -216,19 +218,20 @@ export default function Allergies() {
                     }}
                   />
                 </span>
-                <button
-                  className="w-[15%] md:w-[10%] flex flex-row justify-center items-center text-black hover:text-[red]"
-                  onClick={(event) => {
-                    setDeletingEmployee(employee.name);
-                    if (employee.allergies.length > 0) {
-                      setShowDeleteAllModal(true);
-                    }
-                  }}
-                  title="Delete all allergies"
-                >
-                  <DeleteIcon fontSize="medium" />
-                </button>
               </div>
+              </div>
+            <button
+              className="w-[10%] md:w-[5%] flex flex-row justify-end items-center text-black hover:text-[red]"
+              onClick={(event) => {
+                setDeletingEmployee(employee.name);
+                if (employee.allergies.length > 0) {
+                  setShowDeleteAllModal(true);
+                }
+              }}
+              title="Delete all allergies"
+            >
+              <RefreshIcon fontSize="medium" />
+            </button>
             </li>
           ))}
         </ul>
