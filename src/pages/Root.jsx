@@ -3,9 +3,9 @@ import Navbar from "../components/Navbar.jsx";
 
 export default function RootLayout() {
     return (
-        <div className="flex flex-col items-center w-screen">
+        <div className="flex flex-col items-center w-screen min-h-dvh">
             <Navbar />
-            <main className="flex flex-col items-center w-full bg-[url(/bg.jpg)] bg-cover h-fit">
+            <main className="flex flex-col items-center w-full min-h-[100%] bg-[url(/bg.jpg)] bg-cover">
                 <Outlet />
             </main>
             <div className="bg-button-yellow w-screen h-fit flex items-center py-2 px-5 hover:underline">

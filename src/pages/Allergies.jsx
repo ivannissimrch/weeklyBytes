@@ -105,7 +105,7 @@ export default function Allergies() {
     }
 
     return (
-        <section className="flex flex-col items-center h-screen py-2 w-[95%] md:w-[95%] lg:w-[60%]">
+        <section className="flex flex-col items-center h-screen py-2 pb-64 w-[95%] md:w-[95%] lg:w-[60%]">
             <ToastContainer />
             <div className="grid grid-col grid-cols-3 py-2 items-center justify-between w-full ">
                 <NavLink

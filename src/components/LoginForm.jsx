@@ -5,13 +5,13 @@ export default function Login() {
         useAuthenticateUser();
 
     return (
-        <div className="w-full">
-            <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow">
+        <div className="w-full h-screen">
+            <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow m-6">
                 {!signedIn ? (
-                    <div className="max-w-sm mx-auto">
+                    <div className="max-w-sm mx-auto min-h-full">
                         {error && <p className="text-red-500">{errorMessage}</p>}
                         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                            <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight  ">
+                            <h2 className="text-center text-2xl/9 font-bold tracking-tight  ">
                                 Sign in to your account
                             </h2>
                         </div>
@@ -29,7 +29,7 @@ export default function Login() {
                                             autoComplete="email"
                                             value={email}
                                             required
-                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base    outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
+                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[#364688] sm:text-sm/6"
                                             onChange={(e) => {
                                                 setEmail(e.target.value);
                                             }}
@@ -45,7 +45,7 @@ export default function Login() {
                                         <div className="text-sm">
                                             <a
                                                 href="/ResetPassword"
-                                                className="font-semibold text-orange-500"
+                                                className="font-semibold text-[#364688]"
                                                 onClick={() => handlePasswordReset(email)}>
                                                 Forgot password?
                                             </a>
@@ -59,7 +59,7 @@ export default function Login() {
                                             value={password}
                                             autoComplete="current-password"
                                             required
-                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base    outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
+                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base    outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[#364688] sm:text-sm/6"
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
@@ -68,7 +68,7 @@ export default function Login() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="flex w-full justify-center rounded-md bg-orange-500 hover:bg-orange-700 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                                        className="flex w-full justify-center rounded-md bg-[#364688] hover:bg-indigo-700 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#364688]">
                                         Sign in
                                     </button>
                                 </div>
