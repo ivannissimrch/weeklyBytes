@@ -29,7 +29,7 @@ export default function Login() {
                                             autoComplete="email"
                                             value={email}
                                             required
-                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-900 sm:text-sm/6"
+                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[#364688] sm:text-sm/6"
                                             onChange={(e) => {
                                                 setEmail(e.target.value);
                                             }}
@@ -45,7 +45,7 @@ export default function Login() {
                                         <div className="text-sm">
                                             <a
                                                 href="/ResetPassword"
-                                                className="font-semibold text-indigo-900"
+                                                className="font-semibold text-[#364688]"
                                                 onClick={() => handlePasswordReset(email)}>
                                                 Forgot password?
                                             </a>
@@ -59,7 +59,7 @@ export default function Login() {
                                             value={password}
                                             autoComplete="current-password"
                                             required
-                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base    outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-900 sm:text-sm/6"
+                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base    outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[#364688] sm:text-sm/6"
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
@@ -68,7 +68,7 @@ export default function Login() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="flex w-full justify-center rounded-md bg-indigo-900 hover:bg-indigo-700 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900">
+                                        className="flex w-full justify-center rounded-md bg-[#364688] hover:bg-indigo-700 text-white px-3 py-1.5 text-sm/6 font-semibold   shadow-xs hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#364688]">
                                         Sign in
                                     </button>
                                 </div>
