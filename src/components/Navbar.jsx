@@ -65,7 +65,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <button
-                            className=" text-indigo-900 font-bold py-2 px-6 rounded-full mx-10 border-2 border-indigo-900"
+                            className=" text-[#364688] font-bold py-2 px-6 rounded-full mx-10 border-2 border-[#364688]"
                             onClick={() => {
                                 handleUserAuthentication();
                                 setIsOpen(false);
@@ -77,7 +77,7 @@ export default function Navbar() {
             </div>
             {!signedIn ? (
                 <button
-                    className="hidden lg:block md:block sm border-indigo-900 text-indigo-900 hover:bg-indigo-900 hover:text-white font-bold py-3 px-8 md:px-4 rounded-full border-2 max-w-[50%] justify-self-end"
+                    className="hidden lg:block md:block sm border-[#364688] text-[#364688] hover:bg-[#364688] hover:text-white font-bold py-3 px-8 md:px-4 rounded-full border-2 max-w-[50%] justify-self-end"
                     onClick={() => handleUserAuthentication()}>
                     Sign In
                 </button>
@@ -88,7 +88,7 @@ export default function Navbar() {
                         Hello, <span className="font-bold pr-4">Tom!</span>
                     </p>
                     <button
-                        className="hidden lg:block md:block sm border-indigo-900 text-indigo-900 hover:bg-indigo-900 hover:text-white font-bold py-3 px-8 rounded-full border-2"
+                        className="hidden lg:block md:block sm border-[#364688] text-[#364688] hover:bg-[#364688] hover:text-white font-bold py-3 px-8 rounded-full border-2"
                         onClick={() => handleUserAuthentication()}>
                         Sign Out
                     </button>
