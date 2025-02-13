@@ -6,7 +6,7 @@ export default function Login() {
 
     return (
         <div className="w-full">
-            <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow">
+            <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow m-6">
                 {!signedIn ? (
                     <div className="max-w-sm mx-auto min-h-full">
                         {error && <p className="text-red-500">{errorMessage}</p>}
