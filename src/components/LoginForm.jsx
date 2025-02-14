@@ -5,12 +5,12 @@ export default function Login() {
         useAuthenticateUser();
 
     return (
-        <div className="w-full">
-            <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow m-6">
+        <div className="flex flex-col justify-center items-center s:w-full w-full my-auto">
+            <div className="flex flex-col justify-center px-6 py-12 lg:px-8 bg-custom-yellow rounded">
                 {!signedIn ? (
                     <div className="max-w-sm mx-auto min-h-full">
                         {error && <p className="text-red-500">{errorMessage}</p>}
-                        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                        <div className="sm:mx-auto w-full">
                             <h2 className="text-center text-2xl/9 font-bold tracking-tight  ">
                                 Sign in to your account
                             </h2>
