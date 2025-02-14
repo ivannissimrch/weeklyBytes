@@ -2,8 +2,8 @@
 
 export function DayCard({ data, day, placeholder }) {
   return (
-    <div className="flex flex-col w-full h-fit md:w-54 md:h-[300px] items-center">
-      <h3 className="text-left w-full text-sm md:text-md lg:text-lg md:text-center ">{day}</h3>
+    <div className="flex flex-col w-full h-fit md:w-54 md:h-[300px] items-center bg-button-yellow">
+      <h3 className="text-left w-full text-sm md:text-md lg:text-lg md:text-center px-1 md:px-0">{day}</h3>
       <div className="flex flex-row items-center justify-center bg-white  w-full h-full shadow-lg z-2">
         {typeof data === "object" ? (
           <div className="flex flex-row m-1 items-center justify-center w-[95%] bg-white">

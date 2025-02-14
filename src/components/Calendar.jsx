@@ -56,14 +56,14 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
                 })
               : false,
         }}
-        /*disabled={[
+        disabled={[
           { dayOfWeek: offDaysDisabled },
           { before: startOfWeek(new Date(), { weekStartsOn: 1 }) },
-        ]}*/
+        ]}
         onDayClick={handleDayClick}
       />
       {selectedDays && (
-        <p className="w-[100%] md:w-full  bg-button-blue text-md text-center text-white p-2 font-semibold">
+        <p className="w-[100%] md:w-full  bg-highlight-yellow text-md text-center text-black p-2 font-semibold">
           Selected Week: {selectedDays.from.toLocaleDateString()} ~{"  "}
           {selectedDays.to.toLocaleDateString()}
         </p>
@@ -74,17 +74,17 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
         {`
           
             .rdp-root {
-                --rdp-accent-color: #DDEEF8;
+                --rdp-accent-color: #FFCC00;
                 --rdp-disabled-opacity: 0.3; 
                 --rdp-day_button-height:50px;
-                --rdp-today-color: red;
+                --rdp-today-color: brown;
                 --rdp-range_start-color: black;
                 --rdp-range_start-background: none;
                 --rdp-range_start-date-background-color:none;
                 --rdp-range_end-color: black;
-                --rdp-range_end-background:#C5E9FF;
+                --rdp-range_end-background: #FFCC00;
                 --rdp-range_end-date-background-color: none;
-                --rdp-range_middle-background-color:#C5E9FF;
+                --rdp-range_middle-background-color: #FFCC00;
                 background-color: white;
                 display: flex;
                 flex-flow: row wrap;
@@ -94,13 +94,17 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
                 --rdp-day-width: 30px;
                 --rdp-day_button-width: 30px;
             }
+            .rdp-today {
+              font-weight: bold;
+            }
             .rdp-day{
               width: 30px;
               height: 40px;
               padding: 8px;
             }
             .rdp-day:hover {
-            color: blue
+            color: brown;
+            text-decoration: underline
             }
             .rdp-day_button{
             height: 10px
@@ -119,7 +123,7 @@ export default function Calendar({ onSelectedDaysChange, onOffDaysChange, onTrue
               width: 100%
             }
             .rdp-chevron {
-              fill: blue;
+              fill: #FFCC00;
             }
             .rdp-range_start {
               border-top-left-radius: 50%;
