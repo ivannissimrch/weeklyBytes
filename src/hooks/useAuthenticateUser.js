@@ -6,6 +6,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
     sendPasswordResetEmail,
+    browserSessionPersistence,
 } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +40,7 @@ export default function useAuthenticateUser() {
         e.preventDefault();
         setError(false);
         const auth = getAuth(app);
-        setPersistence(auth, browserLocalPersistence).then(() => {
+        setPersistence(auth, browserSessionPersistence).then(() => {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Successful sign-in

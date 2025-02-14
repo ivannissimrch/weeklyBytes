@@ -84,7 +84,6 @@ export default function Navbar() {
             ) : (
                 <div className="hidden lg:flex md:flex sm flex flex-row justify-self-end items-center">
                     <p>
-                        {/* This would dynamically render user's name */}
                         Hello, <span className="font-bold pr-4">Tom!</span>
                     </p>
                     <button
