@@ -1,40 +1,55 @@
-# voyage-tasks
+# Weekly Bytes
 
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+## Overview
+**Weekly Bytes is an intuitive web application designed to help managers effortlessly create and share weekly meal plans while prioritizing staff safety and dietary needs.** With a vast selection of delicious meals, the app automatically filters out any dishes containing allergens identified by staff members. It then generates a randomized menu—ensuring variety and eliminating meal repetition within the same week. 
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+Say goodbye to the hassle of meal planning and hello to a seamless, allergy-conscious dining experience for your team!
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+## Visuals
+### Landing Page
+![Landing page screen shot](./public/chingu-readme-pic-1.png)
 
-> Own it & Make it your Own!
+### Weekly Meal Planner
+![Landing page screen shot](./public/chingu-readme-pic-2.png)
 
-## Team Documents
+### List Employee Allergies
+![Landing page screen shot](./public/chingu-readme-pic-3.png)
 
-You may find these helpful as you work together to organize your project.
+## Features
+- **Effortless Weekly Meal Planning** – Quick weekly meal plan creation via a Generate & Regenerate buttons
+- **Allergy-Conscious Filtering** – Allows assigning identified allergies to staff members
+- **Extensive Meal Selection** – Access a diverse and extensive menu of meals from an API.
+- **Smart Meal Randomization** – Ensures no meal is repeated within the same week.
+- **User-Friendly Interface** – Simple intuitive design for choosing which week to meal plan and assigning off days.
+- **Documentation Download** – One-click downloading of PDF of allergies and weekly meals plan
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+## Live Version
+https://weekly-bytes.com/
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+## Running The Project Locally
+1. Clone this project locally
+2. Open a terminal and CD into the directory with the repository
+3. In the terminal, type "npm install"
+4. Once installed, type "npm run dev" to run the project.
+5. You should be able to see the locally hosted site at http://localhost:5173/. 
+
+## Dev Dependencies
+* Vite
+* React
+* Emotion 
+* Material UI Icons 
+* Firebase 
+* Date-Fns 
+* JSPDF
+* Moment
+* React-Toastify
+* UUID
+* React-Select
+* React-Router
+
 
 ## Our Team
-
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
-
-- Teammate name #1: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Lisa Rexroad (Primary Scrum Master): [GitHub](https://github.com/lrexroad) / [LinkedIn](https://www.linkedin.com/in/lisa-rexroad-csm-sa-ccmp-b556511b/)
 - Jon Deichmann (Developer): [GitHub](https://github.com/jcad57?tab=repositories) / [LinkedIn](https://www.linkedin.com/in/jon-deichmann/)
 - Jun Kyung Lee (Developer): [GitHub](https://github.com/junlee0325) / [LinkedIn](https://www.linkedin.com/in/iam-junkyunglee/)
