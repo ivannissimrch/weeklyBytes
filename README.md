@@ -25,7 +25,13 @@ Say goodbye to the hassle of meal planning and hello to a seamless, allergy-cons
 
 
 ## Live Version
-https://weekly-bytes.com/
+***Site:*** https://weekly-bytes.com/
+
+#### <ins>Sign-in Credentials<ins>
+**Email:** manager@company.com 
+
+**Password:** password123
+
 
 ## Running The Project Locally
 1. Clone this project locally
