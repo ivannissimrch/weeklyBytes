@@ -43,6 +43,7 @@ Say goodbye to the hassle of meal planning and hello to a seamless, allergy-cons
 ## Dev Dependencies
 * Vite
 * React
+* Tailwind CSS
 * Emotion 
 * Material UI Icons 
 * Firebase 
