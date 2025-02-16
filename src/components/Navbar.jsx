@@ -11,7 +11,7 @@ export default function Navbar() {
     const { signedIn, handleUserAuthentication } = useAuthenticateUser();
 
     return (
-        <div className="relative py-5 w-screen md:w-[95%] lg:w-[80%] grid grid-cols-3 justify-center items-center">
+        <div className="relative py-2 w-screen md:w-[95%] lg:w-[80%] grid grid-cols-3 justify-center items-center h-fit">
             <NavLink className="w-fit col-start-2 md:col-start-1 justify-self-start" to={"/"}>
                 <img src="/logo.svg" alt="Website Logo" className="w-[200px] md:w-[160px]" />
             </NavLink>
